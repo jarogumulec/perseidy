@@ -31,6 +31,7 @@ Pro astronomii není podstatné kolik světla vychází ze zemského povrchu, al
 - **Originální CSV**: [divnovylety/vyhlidkova_mista_cr.csv](https://github.com/DataRozhlas/divnovylety/blob/b74d0d606e967e6b8bc3e9ca77bc8ff908ac0b04/data/vyhlidkova_mista_cr.csv)
 - **Extrahováno z**: OpenStreetMap přes Overpass API
 - **Kategorie**: `tourism=viewpoint`, `man_made=observation_tower`, `natural=peak`
+- **Čištění**: Původní data jsou kontaminovaná surveillance kamerami, webkamerami a dopravním značením. Skript `clean_viewpoints.py` vyfiltruje pouze skutečná vyhlídková místa (5395 z 17521 záznamů).
 
 ### Izochrony
 - **Zdroj**: OpenRouteService API
@@ -82,9 +83,12 @@ perseidy/
 │   ├── perseidy_regional.html          # Mapa: výběr kraje + izochrona
 │   ├── perseidy_full_cz.html           # Mapa: celá ČR manuální hledání
 │   └── perseidy_top_sites.html         # Mapa: top místa per kraj
-├── vyhlidkova_mista_cr.csv     # Zdrojová data výhledových míst (od Michala)
+├── vyhlidkova_mista_cr.csv     # Zdrojová data výhledových míst (od Michala, kontaminovaná)
+├── vyhlidkova_mista_cr_clean.csv       # Vyčištěná data (pouze skutečné vyhlídky)
+├── vyhlidkova_mista_cr_clean_named.csv # Pouze pojmenovaná místa (bez "Unnamed POI")
 ├── krajska_mista.csv           # Krajská města pro izochrony
 ├── crop_falchi_to_cz.py        # Skript pro oříznutí GeoTIFF
+├── clean_viewpoints.py         # Čištění vstupních dat (odstraní surveillance kamery atd.)
 ├── generate_isochrones.py      # Generování izochron přes ORS API
 ├── analyze_dark_sites.py       # Hlavní analýza a průniky
 ├── create_html_maps.py         # Generování HTML map
@@ -125,7 +129,21 @@ python crop_falchi_to_cz.py
 
 Výsledek: `data/cesko_tma.tif` (~1 MB)
 
-### 2. Generování izochron
+### 2. (Volitelné) Vyčistit vstupní data
+
+Pokud chceš použít čerstvá vyčištěná data:
+
+```bash
+python clean_viewpoints.py
+```
+
+Výstup:
+- `vyhlidkova_mista_cr_clean.csv` - Všechna vyhlídková místa (5395 záznamů)
+- `vyhlidkova_mista_cr_clean_named.csv` - Pouze pojmenovaná místa (1438 záznamů)
+
+**Poznámka**: Analýza automaticky používá vyčištěná data (`vyhlidkova_mista_cr_clean.csv`).
+
+### 3. Generování izochron
 
 ```bash
 python generate_isochrones.py
@@ -183,3 +201,51 @@ https://github.com/DataRozhlas/divnovylety
 
 - Jaromír Gumulec (analýza, skripty)
 - Michal Kašpárek (data výhledových míst)
+
+---
+
+## Changelog - Čištění dat vyhlídkových míst (2025-08-02)
+
+### Problém
+Původní dataset `vyhlidkova_mista_cr.csv` (17 521 záznamů) byl silně kontaminovaný nesmyslnými záznamy z OSM:
+
+| Typ kontaminace | Počet | Příklad |
+|-----------------|-------|---------|
+| Surveillance kamery | 11 757 | Městské bezpečnostní kamery |
+| Webkamery | 20 | Online webkamery |
+| Dopravní značení | 49 | Rychlostní kamery, semafory |
+| Jiné nesmysly | ~300 | Budovy bez výhledu, strážnice |
+
+### Řešení
+Vytvořen skript `clean_viewpoints.py` s následujícími filtry:
+
+**Zachováno** (skutečná vyhlídková místa):
+- `tourism=viewpoint` — vyhlídková místa
+- `man_made=observation_tower`, `tower`, `windmill` — rozhledny, větrné mlýny s vyhlídkou
+- `tower:type=observation/watchtower/lookout` — věže s výhledem
+
+**Odstraněno**:
+- `man_made=surveillance` — všechny typy kamer
+- `surveillance=camera/webcam/traffic/average_speed/red_light` — specifické typy monitoringu
+
+### Výsledek
+| Soubor | Počet | Popis |
+|--------|-------|-------|
+| `vyhlidkova_mista_cr_clean.csv` | 5 395 | Všechna vyhlídková místa |
+| `vyhlidkova_mista_cr_clean_named.csv` | 1 438 | Pouze pojmenovaná místa |
+
+**Odebráno**: 12 126 neplatných záznamů (69 % původního datasetu)
+
+### Poznámka k kvalitě dat
+Vyčištěná data stále mohou obsahovat některé problematické záznamy které nelze automaticky filtrovat:
+
+1. **Nízké objekty (3–5 m)** — 5 bodů s výškou pod 5m může být malé vyhlídkové plošiny nebo chybně tagované body
+2. **"Vrcholy hor" v lese** — Některá místa tagovaná jako `tourism=viewpoint` mohou být v lese bez skutečného výhledu (např. "Branžovský les")
+3. **Unnamed POI** — 3 957 bodů bez názvu (zůstaly zachovány, mohou být validní vyhlídky)
+
+Tyto body jsou tagované v OSM jako viewpoint což předpokládá výhled, ale manuální ověření každé lokality není možné. Data jsou tedy **doporučena s poznámkou** že některé lokality mohou vyžadovat ověření.
+
+### Budoucí vylepšení
+- Přidat filtr na minimální výšku (`height > 5m`) pro rozhledny
+- Ruční kontrola a odstranění známých chybných lokalit
+- Integrace s dalšími datovými zdroji (např. oficiální seznam rozhleden AČK)
