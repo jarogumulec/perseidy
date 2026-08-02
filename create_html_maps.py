@@ -13,6 +13,7 @@ import geopandas as gpd
 import json
 from pathlib import Path
 import folium
+import base64
 
 # Paths
 DATA_DIR = Path(__file__).parent / "data"
@@ -20,9 +21,13 @@ OUTPUT_DIR = Path(__file__).parent / "output"
 ISOCHRONES_DIR = Path(__file__).parent / "isochrones"
 
 CESKO_TMA_TIFF = DATA_DIR / "cesko_tma.tif"
+FALCHI_PNG = OUTPUT_DIR / "falchi_overlay.png"
 VIEWPOINTS_CSV = OUTPUT_DIR / "viewpoints_with_darkness.csv"
 BEST_SITES_CSV = OUTPUT_DIR / "best_sites_per_city.csv"
 REACHABLE_CSV = OUTPUT_DIR / "reachable_dark_sites.csv"
+
+# Falchi bounds in EPSG:4326 (lat/lon)
+FALCHI_BOUNDS = [12.083257, 48.545848, 18.866587, 51.062514]  # [min_lon, min_lat, max_lon, max_lat]
 
 # Falchi color palette (from QGIS export)
 FALCHI_COLORS = [
@@ -148,6 +153,36 @@ def load_raster_as_tiles():
     return None  # Will be implemented differently
 
 
+def load_falchi_overlay():
+    """Load pre-generated Falchi PNG overlay."""
+    if FALCHI_PNG.exists():
+        with open(FALCHI_PNG, 'rb') as f:
+            png_bytes = f.read()
+        png_base64 = base64.b64encode(png_bytes).decode('utf-8')
+        return png_base64
+    return None
+
+
+def add_falchi_layer(m, opacity=0.5):
+    """Add Falchi light pollution overlay to the map."""
+    if not FALCHI_PNG.exists():
+        print("  WARNING: Falchi overlay PNG not found!")
+        return
+
+    min_lon, min_lat, max_lon, max_lat = FALCHI_BOUNDS
+
+    # Create image overlay using file path
+    falchi_overlay = folium.raster_layers.ImageOverlay(
+        image=str(FALCHI_PNG),
+        bounds=[[min_lat, min_lon], [max_lat, max_lon]],
+        opacity=opacity,
+        interactive=False,
+        zindex=1
+    )
+    falchi_overlay.add_to(m)
+    return falchi_overlay
+
+
 def create_regional_map():
     """
     Create regional view map: user selects a region, sees isochrone + viewpoints.
@@ -207,6 +242,9 @@ def create_regional_map():
         ).add_to(isochrone_group)
 
     isochrone_group.add_to(m)
+
+    # Add Falchi light pollution overlay
+    add_falchi_layer(m, opacity=0.5)
 
     # Add dark sites within this region (filtered by isochrone)
     dark_sites_group = folium.FeatureGroup(name="Tmavá místa (< 0.16)")
@@ -288,6 +326,9 @@ def create_full_cz_map():
     '''
     m.get_root().html.add_child(folium.Element(legend_html))
 
+    # Add Falchi light pollution overlay
+    add_falchi_layer(m, opacity=0.5)
+
     # Add all dark sites
     for _, row in df.iterrows():
         val = row.get('darkness_value', None)
@@ -340,6 +381,9 @@ def create_top_sites_map():
     </div>
     '''
     m.get_root().html.add_child(folium.Element(title_html))
+
+    # Add Falchi light pollution overlay
+    add_falchi_layer(m, opacity=0.5)
 
     # Add markers for best sites
     for _, row in best_sites.iterrows():
