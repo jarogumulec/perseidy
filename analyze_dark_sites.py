@@ -1,0 +1,304 @@
+#!/usr/bin/env python3
+"""
+Analyze dark sky sites for Perseids observation.
+
+1. Load viewpoint locations from CSV
+2. Sample Falchi light pollution raster at each point
+3. Filter by darkness threshold (< 0.16 ratio to natural brightness)
+4. Cross-reference with isochrones (1h drive from regional capitals)
+5. Output: best sites per region with darkness level and accessibility
+"""
+
+import pandas as pd
+import geopandas as gpd
+import numpy as np
+from pathlib import Path
+import json
+import rasterio
+
+# Paths
+DATA_DIR = Path(__file__).parent / "data"
+OUTPUT_DIR = Path(__file__).parent / "output"
+
+VIEWPOINTS_CSV = Path(__file__).parent / "vyhlidkova_mista_cr.csv"
+CESKO_TMA_TIFF = DATA_DIR / "cesko_tma.tif"
+ISOCHRONES_DIR = Path(__file__).parent / "isochrones"
+OUTPUT_DIR.mkdir(exist_ok=True)
+
+
+# Falchi classification thresholds (ratio to natural brightness)
+FALCHI_THRESHOLDS = [
+    (0.01, "Černá", "#000000", "Přirozená tma"),
+    (0.02, "Tmavě šedá", "#A9A9A9", "Velmi tmavá"),
+    (0.04, "Šedá", "#808080", "Téměř přirozená"),
+    (0.08, "Tmavě modrá", "#00008B", "Slabé znečištění"),
+    (0.16, "Modrá", "#0000FF", "Mírné znečištění"),
+    (0.32, "Světle modrá", "#ADD8E6", "Střední znečištění"),
+    (0.64, "Tmavě zelená", "#006400", "Znečištěná"),
+    (1.28, "Zelená", "#008000", "Silné znečištění"),
+    (2.56, "Žlutá", "#FFFF00", "Velmi silné znečištění"),
+    (5.12, "Oranžová", "#FFA500", "Extrémní znečištění"),
+    (10.24, "Červená", "#FF0000", "Oběžná zóna"),
+    (20.48, "Purpurová", "#FF00FF", "Totální světlo"),
+    (40.96, "Bílá", "#FFFFFF", "Bez oblohy"),
+]
+
+DARKNESS_THRESHOLD = 0.16  # Good for Perseids observation
+
+
+def get_falchi_category(value):
+    """Convert numeric value to Falchi category name."""
+    if pd.isna(value) or value == 0:
+        return "Neznámá/Přirozená"
+    for threshold, name, color, desc in FALCHI_THRESHOLDS:
+        if value <= threshold:
+            return f"{name} ({desc})"
+    return "Bílá (Bez oblohy)"
+
+
+def load_viewpoints():
+    """Load and clean viewpoint data from CSV."""
+    df = pd.read_csv(VIEWPOINTS_CSV)
+
+    # Filter out surveillance/camera points
+    if 'surveillance' in df.columns:
+        df = df[df['surveillance'] != 'surveillance']
+
+    # Filter out pure surveillance towers
+    if 'man_made' in df.columns:
+        df = df[~(df['man_made'] == 'tower')]
+
+    # Keep only valid viewpoints with coordinates
+    df = df.dropna(subset=['lat', 'lon'])
+    df = df[(df['lat'] >= 48.5) & (df['lat'] <= 51.2)]  # Czech bounds
+    df = df[(df['lon'] >= 12) & (df['lon'] <= 19)]
+
+    print(f"Loaded {len(df)} valid viewpoints")
+    return df
+
+
+def sample_raster_at_points(viewpoints_df):
+    """Sample the light pollution raster at viewpoint locations."""
+    import rasterio
+
+    # Create GeoDataFrame
+    gdf = gpd.GeoDataFrame(
+        viewpoints_df.copy(),
+        geometry=gpd.points_from_xy(viewpoints_df['lon'], viewpoints_df['lat']),
+        crs="EPSG:4326"
+    )
+
+    # Open raster and sample
+    with rasterio.open(CESKO_TMA_TIFF) as src:
+        # Reproject points to raster CRS if needed
+        if src.crs != gdf.crs:
+            gdf = gdf.to_crs(src.crs)
+
+        # Sample at each point individually
+        values = []
+        for _, row in gdf.iterrows():
+            geom = row.geometry
+            try:
+                val = list(src.sample([(geom.x, geom.y)]))[0][0]
+                values.append(val if val is not None else np.nan)
+            except:
+                values.append(np.nan)
+
+    # Add sampled values to dataframe
+    viewpoints_df['darkness_value'] = values
+    viewpoints_df['falchi_category'] = [get_falchi_category(v) for v in values]
+
+    print(f"Sampled {len(values)} points from raster")
+    return viewpoints_df
+
+
+def load_isochrones():
+    """Load all isochrone polygons from GeoJSON files."""
+    import json
+    from shapely.geometry import mapping
+
+    isochrones = {}
+
+    for geojson_file in ISOCHRONES_DIR.glob("isochrone_*.geojson"):
+        city_name = geojson_file.stem.replace("isochrone_", "")
+
+        with open(geojson_file) as f:
+            data = json.load(f)
+
+        # Extract polygon geometry using GeoSeries from features
+        gdf = gpd.GeoDataFrame.from_features(data['features'], crs="EPSG:4326")
+
+        isochrones[city_name] = gdf
+
+    print(f"Loaded {len(isochrones)} isochrones")
+    return isochrones
+
+
+def find_sites_in_isochrones(viewpoints_df, isochrones_dict):
+    """Find which viewpoints fall within which isochrones."""
+    # Convert viewpoints to GeoDataFrame
+    gdf_points = gpd.GeoDataFrame(
+        viewpoints_df,
+        geometry=gpd.points_from_xy(viewpoints_df['lon'], viewpoints_df['lat']),
+        crs="EPSG:4326"
+    )
+
+    # For each isochrone, find contained points
+    results = []
+
+    for city, giso in isochrones_dict.items():
+        # Spatial join to find points within isochrone
+        joined = gpd.sjoin(gdf_points, giso, how='inner', predicate='within')
+
+        for idx, row in joined.iterrows():
+            results.append({
+                'name': row['name'],
+                'lat': row['lat'],
+                'lon': row['lon'],
+                'darkness_value': row.get('darkness_value', np.nan),
+                'falchi_category': row.get('falchi_category', 'Unknown'),
+                'reachable_from_city': city,
+                'addr_city': row.get('addr:city', 'Unknown')
+            })
+
+    return pd.DataFrame(results)
+
+
+def get_best_sites_per_region(dark_sites_df):
+    """Get the darkest site reachable from each regional capital."""
+    # Sort by darkness value (lower = darker)
+    sorted_sites = dark_sites_df.sort_values('darkness_value')
+
+    # Get best site per city
+    best_per_city = []
+    seen_cities = set()
+
+    for _, row in sorted_sites.iterrows():
+        city = row['reachable_from_city']
+        if city not in seen_cities:
+            seen_cities.add(city)
+            best_per_city.append(row)
+
+    return pd.DataFrame(best_per_city)
+
+
+def main():
+    print("=" * 60)
+    print("Perseids Dark Sky Site Analysis")
+    print("=" * 60)
+
+    # Step 1: Load viewpoints
+    print("\n[1/4] Loading viewpoints...")
+    viewpoints = load_viewpoints()
+
+    # Step 2: Sample raster
+    print("\n[2/4] Sampling light pollution raster...")
+    viewpoints_with_darkness = sample_raster_at_points(viewpoints)
+
+    # Save intermediate result
+    output_file = OUTPUT_DIR / "viewpoints_with_darkness.csv"
+    viewpoints_with_darkness.to_csv(output_file, index=False)
+    print(f"Saved: {output_file}")
+
+    # Step 3: Filter dark sites
+    print(f"\n[3/4] Filtering sites with darkness < {DARKNESS_THRESHOLD}...")
+    dark_sites = viewpoints_with_darkness[
+        viewpoints_with_darkness['darkness_value'] < DARKNESS_THRESHOLD
+    ].copy()
+    print(f"Found {len(dark_sites)} suitable dark sites")
+
+    # Step 4: Cross-reference with isochrones
+    print("\n[4/4] Cross-referencing with isochrones...")
+
+    # Check if isochrones exist
+    if not any(ISOCHRONES_DIR.glob("isochrone_*.geojson")):
+        print("WARNING: No isochrones found. Run generate_isochrones.py first.")
+        print("         Skipping isochrone analysis.")
+
+        # Save dark sites without isochrone info
+        dark_sites_output = OUTPUT_DIR / "dark_sites.csv"
+        dark_sites.to_csv(dark_sites_output, index=False)
+        print(f"Saved dark sites: {dark_sites_output}")
+        return
+
+    isochrones_dict = load_isochrones()
+    reachable_sites = find_sites_in_isochrones(dark_sites, isochrones_dict)
+    print(f"Found {len(reachable_sites)} dark sites within 1h drive")
+
+    # Get best site per city
+    best_per_city = get_best_sites_per_region(reachable_sites)
+
+    # Save outputs
+    reachable_output = OUTPUT_DIR / "reachable_dark_sites.csv"
+    reachable_sites.to_csv(reachable_output, index=False)
+    print(f"Saved reachable dark sites: {reachable_output}")
+
+    best_output = OUTPUT_DIR / "best_sites_per_city.csv"
+    best_per_city.to_csv(best_output, index=False)
+    print(f"Saved best sites per city: {best_output}")
+
+    # Print summary
+    print("\n" + "=" * 60)
+    print("SUMMARY: Best dark sites per regional capital")
+    print("=" * 60)
+    for _, row in best_per_city.iterrows():
+        print(f"\n{row['reachable_from_city']}:")
+        print(f"  Místo: {row['name']}")
+        print(f"  Poloha: {row['lat']:.4f}, {row['lon']:.4f}")
+        print(f"  Hodnota tmy: {row['darkness_value']:.4f}")
+        print(f"  Kategorie: {row['falchi_category']}")
+
+    # Create HTML map
+    create_summary_map(best_per_city, dark_sites)
+
+
+def create_summary_map(best_sites_df, all_dark_sites_df):
+    """Create an interactive Folium map showing the results."""
+    import folium
+
+    # Center on Czech Republic
+    center_lat = all_dark_sites_df['lat'].mean()
+    center_lon = all_dark_sites_df['lon'].mean()
+
+    m = folium.Map(location=[center_lat, center_lon], zoom_start=7)
+
+    # Add all dark sites as circles
+    for _, row in all_dark_sites_df.iterrows():
+        val = row['darkness_value']
+        if pd.isna(val):
+            continue
+
+        # Color based on darkness
+        if val < 0.04:
+            color = 'black'
+        elif val < 0.08:
+            color = 'darkblue'
+        elif val < 0.16:
+            color = 'blue'
+        else:
+            color = 'lightblue'
+
+        folium.CircleMarker(
+            location=[row['lat'], row['lon']],
+            radius=5,
+            color=color,
+            fill=True,
+            fill_color=color,
+            popup=f"{row['name']}: {val:.4f}"
+        ).add_to(m)
+
+    # Highlight best sites per city
+    for _, row in best_sites_df.iterrows():
+        folium.Marker(
+            location=[row['lat'], row['lon']],
+            popup=f"<b>{row['reachable_from_city']}</b><br>{row['name']}<br>Tma: {row['darkness_value']:.4f}",
+            icon=folium.Icon(color='red', icon='star')
+        ).add_to(m)
+
+    output_file = OUTPUT_DIR / "dark_sites_map.html"
+    m.save(output_file)
+    print(f"\nInteractive map saved to: {output_file}")
+
+
+if __name__ == "__main__":
+    main()
