@@ -1,0 +1,78 @@
+okres,kraj,latitude,longitude
+Benešov,Středočeský kraj,49.7842,14.6823
+Beroun,Středočeský kraj,49.9651,14.0720
+Kladno,Středočeský kraj,50.1476,14.1028
+Kolín,Středočeský kraj,50.0267,15.1944
+Kutná Hora,Středočeský kraj,49.9451,15.2677
+Mělník,Středočeský kraj,50.3508,14.4747
+Mladá Boleslav,Středočeský kraj,50.4254,14.9033
+Nymburk,Středočeský kraj,50.1714,15.0928
+Praha-východ,Středočeský kraj,50.0417,14.6186
+Praha-západ,Středočeský kraj,50.0608,14.3147
+Příbram,Středočeský kraj,49.6914,14.0229
+Rakovník,Středočeský kraj,50.0997,13.7381
+České Budějovice,Jihočeský kraj,48.9745,14.4743
+Český Krumlov,Jihočeský kraj,48.8126,14.3175
+Jindřichův Hradec,Jihočeský kraj,49.1447,15.0444
+Písek,Jihočeský kraj,49.3063,14.1308
+Prachatice,Jihočeský kraj,48.9408,13.9879
+Strakonice,Jihočeský kraj,49.2656,13.8750
+Tábor,Jihočeský kraj,49.4042,14.6547
+Domažlice,Plzeňský kraj,49.4339,12.6465
+Klatovy,Plzeňský kraj,49.3947,13.3583
+Plzeň-město,Plzeňský kraj,49.7384,13.3736
+Plzeň-jih,Plzeňský kraj,49.6042,13.4754
+Plzeň-sever,Plzeňský kraj,49.8264,13.2539
+Rokycany,Plzeňský kraj,49.7342,13.6308
+Tachov,Plzeňský kraj,49.6647,12.8476
+Cheb,Karlovarský kraj,50.0686,12.3664
+Karlovy Vary,Karlovarský kraj,50.2324,12.8710
+Sokolov,Karlovarský kraj,50.2147,12.6986
+Děčín,Ústecký kraj,50.7821,14.2147
+Chomutov,Ústecký kraj,50.4608,13.4144
+Litoměřice,Ústecký kraj,50.5264,14.1428
+Louny,Ústecký kraj,50.3428,13.9786
+Most,Ústecký kraj,50.5020,13.6351
+Teplice,Ústecký kraj,50.6251,13.8242
+Ústí nad Labem,Ústecký kraj,50.6607,14.0307
+Česká Lípa,Liberecký kraj,50.6917,14.5474
+Jablonec nad Nisou,Liberecký kraj,50.7217,15.1708
+Liberec,Liberecký kraj,50.7663,15.0543
+Semily,Liberecký kraj,50.5647,15.3297
+Hradec Králové,Královéhradecký kraj,50.2093,15.8327
+Jičín,Královéhradecký kraj,50.4342,15.3786
+Náchod,Královéhradecký kraj,50.4186,15.9775
+Rychnov nad Kněžnou,Královéhradecký kraj,50.1347,16.2547
+Trutnov,Královéhradecký kraj,50.5628,15.9714
+Chrudim,Pardubický kraj,49.9297,15.8220
+Pardubice,Pardubický kraj,50.0343,15.7812
+Svitavy,Pardubický kraj,49.6147,16.0947
+Ústí nad Orlicí,Pardubický kraj,49.9647,16.4214
+Havlíčkův Brod,Kraj Vysočina,49.5764,15.5914
+Jihlava,Kraj Vysočina,49.3961,15.5920
+Pelhřimov,Kraj Vysočina,49.4314,15.1808
+Třebíč,Kraj Vysočina,49.2147,15.8714
+Žďár nad Sázavou,Kraj Vysočina,49.5475,16.0086
+Blansko,Jihomoravský kraj,49.3714,16.5947
+Brno-město,Jihomoravský kraj,49.1951,16.6068
+Brno-venkov,Jihomoravský kraj,49.1714,16.5475
+Břeclav,Jihomoravský kraj,48.8414,16.8714
+Hodonín,Jihomoravský kraj,48.8547,17.1214
+Vyškov,Jihomoravský kraj,49.2214,17.0047
+Znojmo,Jihomoravský kraj,48.8528,16.0547
+Jeseník,Olomoucký kraj,50.0814,17.1547
+Olomouc,Olomoucký kraj,49.5938,17.2509
+Prostějov,Olomoucký kraj,49.4714,17.1147
+Přerov,Olomoucký kraj,49.4547,17.4547
+Šumperk,Olomoucký kraj,49.9647,16.9714
+Kroměříž,Zlínský kraj,49.2814,17.3947
+Uherské Hradiště,Zlínský kraj,49.0714,17.4714
+Vsetín,Zlínský kraj,49.2714,18.0047
+Zlín,Zlínský kraj,49.2237,17.6696
+Bruntál,Moravskoslezský kraj,49.9414,17.4547
+Frýdek-Místek,Moravskoslezský kraj,49.6847,18.3514
+Karviná,Moravskoslezský kraj,49.8475,18.5414
+Nový Jičín,Moravskoslezský kraj,49.5914,18.0214
+Opava,Moravskoslezský kraj,49.9314,18.0714
+Ostrava-město,Moravskoslezský kraj,49.8209,18.2625
+Hlavní město Praha,Praha,50.0755,14.4378
