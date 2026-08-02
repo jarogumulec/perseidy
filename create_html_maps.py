@@ -3,9 +3,9 @@
 Create interactive HTML maps for Perseids project.
 
 Generates 3 map variants:
-1. Regional view: Select a region, shows isochrone + viewpoints within it
-2. Full CZ view: Entire Czech Republic with all viewpoints, manual exploration
-3. Top sites: Table of darkest sites per city with map markers
+1. Regional view: Select a region via dropdown, shows only viewpoints in that region
+2. Full CZ view: Entire Czech Republic with all viewpoints + darkest site highlighted
+3. Top sites: Darkest sites per city with markers
 """
 
 import pandas as pd
@@ -22,31 +22,61 @@ ISOCHRONES_DIR = Path(__file__).parent / "isochrones"
 
 CESKO_TMA_TIFF = DATA_DIR / "cesko_tma.tif"
 FALCHI_PNG = OUTPUT_DIR / "falchi_overlay.png"
+FALCHI_BOUNDS_JSON = OUTPUT_DIR / "falchi_bounds.json"
 VIEWPOINTS_CSV = OUTPUT_DIR / "viewpoints_with_darkness.csv"
 BEST_SITES_CSV = OUTPUT_DIR / "best_sites_per_city.csv"
 REACHABLE_CSV = OUTPUT_DIR / "reachable_dark_sites.csv"
 
-# Falchi bounds in EPSG:4326 (lat/lon)
-FALCHI_BOUNDS = [12.083257, 48.545848, 18.866587, 51.062514]  # [min_lon, min_lat, max_lon, max_lat]
-
-# Falchi color palette (from QGIS export)
+# Falchi color palette (matches QGIS export)
 FALCHI_COLORS = [
-    (0.01, '#000000'),  # Černá
-    (0.02, '#808080'),  # Tmavě šedá
-    (0.04, '#A9A9A9'),  # Šedá
-    (0.08, '#00008B'),  # Tmavě modrá
-    (0.16, '#0000FF'),  # Modrá
-    (0.32, '#444AF8'),  # Světle modrá
-    (0.64, '#006400'),  # Tmavě zelená
-    (1.28, '#008000'),  # Zelená
-    (2.56, '#FFFF00'),  # Žlutá
-    (5.12, '#FFA500'),  # Oranžová
-    (10.24, '#FF0000'),  # Červená
-    (20.48, '#FF00FF'),  # Purpurová
-    (40.96, '#FFC0CB'),  # Růžová
+    (0.01, '#000000'),  # <= 0.01  - Černá
+    (0.02, '#808080'),  # 0.01-0.02 - Tmavě šedá
+    (0.04, '#A9A9A9'),  # 0.02-0.04 - Šedá
+    (0.08, '#00008B'),  # 0.04-0.08 - Tmavě modrá
+    (0.16, '#0000FF'),  # 0.08-0.16 - Modrá
+    (0.32, '#444AF8'),  # 0.16-0.32 - Světle modrá
+    (0.64, '#006400'),  # 0.32-0.64 - Tmavě zelená
+    (1.28, '#008000'),  # 0.64-1.28 - Zelená
+    (2.56, '#FFFF00'),  # 1.28-2.56 - Žlutá
+    (5.12, '#FFA500'),  # 2.56-5.12 - Oranžová
+    (10.24, '#FF0000'),  # 5.12-10.24 - Červená
+    (20.48, '#FF00FF'),  # 10.24-20.48 - Purpurová
+    (40.96, '#FFC0CB'),  # 20.48-40.96 - Růžová
 ]
 
-# Falchi category labels (used in get_falchi_category function)
+FALCHI_LABELS = {
+    0.01: "Přirozená tma",
+    0.02: "Velmi tmavá",
+    0.04: "Téměř přirozená",
+    0.08: "Slabé znečištění",
+    0.16: "Mírné znečištění",
+    0.32: "Střední znečištění",
+    0.64: "Znečištěná",
+    1.28: "Silné znečištění",
+    2.56: "Velmi silné znečištění",
+    5.12: "Extrémní znečištění",
+    10.24: "Oběžná zóna",
+    20.48: "Totální světlo",
+    40.96: "Bez oblohy",
+}
+
+# Czech regions
+CZECH_REGIONS = [
+    ("Hlavní město Praha", "Praha"),
+    ("Středočeský kraj", "Příbram"),
+    ("Jihočeský kraj", "České Budějovice"),
+    ("Plzeňský kraj", "Plzeň"),
+    ("Karlovarský kraj", "Karlovy Vary"),
+    ("Ústecký kraj", "Ústí nad Labem"),
+    ("Liberecký kraj", "Liberec"),
+    ("Královéhradecký kraj", "Hradec Králové"),
+    ("Pardubický kraj", "Pardubice"),
+    ("Kraj Vysočina", "Jihlava"),
+    ("Jihomoravský kraj", "Brno"),
+    ("Olomoucký kraj", "Olomouc"),
+    ("Zlínský kraj", "Zlín"),
+    ("Moravskoslezský kraj", "Ostrava"),
+]
 
 
 def get_falchi_color(value):
@@ -63,218 +93,192 @@ def get_falchi_category(value):
     """Get Falchi category name for a darkness value."""
     if pd.isna(value):
         return "Neznámá"
-    if value <= 0.01:
-        return "Přirozená tma"
-    elif value <= 0.02:
-        return "Velmi tmavá"
-    elif value <= 0.04:
-        return "Téměř přirozená"
-    elif value <= 0.08:
-        return "Slabé znečištění"
-    elif value <= 0.16:
-        return "Mírné znečištění"
-    elif value <= 0.32:
-        return "Střední znečištění"
-    elif value <= 0.64:
-        return "Znečištěná"
-    elif value <= 1.28:
-        return "Silné znečištění"
-    elif value <= 2.56:
-        return "Velmi silné znečištění"
-    elif value <= 5.12:
-        return "Extrémní znečištění"
-    elif value <= 10.24:
-        return "Oběžná zóna"
-    elif value <= 20.48:
-        return "Totální světlo"
-    elif value <= 40.96:
-        return "Bez oblohy"
-    else:
-        return "Totální znečištění"
+    for threshold, label in sorted(FALCHI_LABELS.items()):
+        if value <= threshold:
+            return label
+    return "Bez oblohy"
 
 
-def create_base_map(center_lat=49.8, center_lon=15.5, zoom=7):
-    """Create a base Folium map with common settings."""
-    m = folium.Map(location=[center_lat, center_lon], zoom_start=zoom, tiles='OpenStreetMap')
-    return m
-
-
-def add_viewpoint_layer(m, df, title="Výhledová místa"):
-    """Add viewpoint markers to the map."""
-    for _, row in df.iterrows():
-        val = row.get('darkness_value', None)
-        if val is None or pd.isna(val):
-            continue
-
-        color = get_falchi_color(val)
-        category = get_falchi_category(val)
-        name = row.get('name', 'Unnamed POI')
-        lat, lon = row['lat'], row['lon']
-
-        popup_text = f"<b>{name}</b><br>Tma: {val:.4f}<br>{category}"
-
-        folium.CircleMarker(
-            location=[lat, lon],
-            radius=4,
-            color='#333333',
-            weight=1,
-            fill=True,
-            fill_color=color,
-            fill_opacity=0.8,
-            popup=folium.Popup(popup_text, max_width=250)
-        ).add_to(m)
-
-
-def add_isochrone_layer(m, geojson_data, city_name):
-    """Add isochrone polygon to the map."""
-    folium.GeoJson(
-        geojson_data,
-        name=f'Isochrone {city_name}',
-        style_function=lambda feature: {
-            'fillColor': '#ff6600',
-            'color': '#ff6600',
-            'weight': 2,
-            'fillOpacity': 0.2,
-        },
-        tooltip=f'1h dojezd od {city_name}'
-    ).add_to(m)
-
-
-def load_raster_as_tiles():
-    """Convert GeoTIFF to web map tiles using leafmap/xyzservices approach."""
-    # For now, we'll use a simpler approach with rasterio and folium's ImageOverlay
-    import rasterio
-    from rasterio.warp import calculate_default_transform, reproject, Resampling
-    import numpy as np
-    import io
-    import base64
-    from PIL import Image
-
-    return None  # Will be implemented differently
-
-
-def load_falchi_overlay():
-    """Load pre-generated Falchi PNG overlay."""
-    if FALCHI_PNG.exists():
-        with open(FALCHI_PNG, 'rb') as f:
-            png_bytes = f.read()
-        png_base64 = base64.b64encode(png_bytes).decode('utf-8')
-        return png_base64
+def load_falchi_bounds():
+    """Load Falchi bounds from JSON file."""
+    if FALCHI_BOUNDS_JSON.exists():
+        with open(FALCHI_BOUNDS_JSON) as f:
+            return json.load(f)
     return None
 
 
-def add_falchi_layer(m, opacity=0.5):
+def add_falchi_layer(m):
     """Add Falchi light pollution overlay to the map."""
-    if not FALCHI_PNG.exists():
-        print("  WARNING: Falchi overlay PNG not found!")
-        return
+    if not FALCHI_PNG.exists() or not FALCHI_BOUNDS_JSON.exists():
+        print("  WARNING: Falchi overlay files not found!")
+        return None
 
-    min_lon, min_lat, max_lon, max_lat = FALCHI_BOUNDS
+    with open(FALCHI_BOUNDS_JSON) as f:
+        bounds_info = json.load(f)
 
-    # Create image overlay using file path
+    min_lat, min_lon = bounds_info['min_lat'], bounds_info['min_lon']
+    max_lat, max_lon = bounds_info['max_lat'], bounds_info['max_lon']
+
     falchi_overlay = folium.raster_layers.ImageOverlay(
         image=str(FALCHI_PNG),
         bounds=[[min_lat, min_lon], [max_lat, max_lon]],
-        opacity=opacity,
+        opacity=0.5,
         interactive=False,
-        zindex=1
+        name="Světelné znečištění (Falchi)"
     )
     falchi_overlay.add_to(m)
     return falchi_overlay
 
 
+def add_legend(m):
+    """Add legend for Falchi light pollution levels."""
+    legend_html = '''
+    <div style="position: fixed; bottom: 30px; right: 10px; z-index: 1000;
+                background: white; padding: 10px; border-radius: 5px;
+                box-shadow: 0 0 10px rgba(0,0,0,0.3); font-size: 11px;
+                max-height: 300px; overflow-y: auto;">
+        <b>Světelné znečištění</b><br>
+        <i style="background: #000000; width: 15px; height: 15px; display: inline-block;"></i> Přirozená tma<br>
+        <i style="background: #808080; width: 15px; height: 15px; display: inline-block;"></i> Velmi tmavá<br>
+        <i style="background: #A9A9A9; width: 15px; height: 15px; display: inline-block;"></i> Téměř přirozená<br>
+        <i style="background: #00008B; width: 15px; height: 15px; display: inline-block;"></i> Slabé znečištění<br>
+        <i style="background: #0000FF; width: 15px; height: 15px; display: inline-block;"></i> Mírné znečištění<br>
+        <i style="background: #444AF8; width: 15px; height: 15px; display: inline-block;"></i> Střední znečištění<br>
+        <i style="background: #006400; width: 15px; height: 15px; display: inline-block;"></i> Znečištěná<br>
+        <i style="background: #008000; width: 15px; height: 15px; display: inline-block;"></i> Silné znečištění<br>
+        <i style="background: #FFFF00; width: 15px; height: 15px; display: inline-block;"></i> Velmi silné<br>
+        <i style="background: #FFA500; width: 15px; height: 15px; display: inline-block;"></i> Extrémní<br>
+        <i style="background: #FF0000; width: 15px; height: 15px; display: inline-block;"></i> Oběžná zóna<br>
+        <i style="background: #FF00FF; width: 15px; height: 15px; display: inline-block;"></i> Totální světlo<br>
+    </div>
+    '''
+    m.get_root().html.add_child(folium.Element(legend_html))
+
+
 def create_regional_map():
     """
-    Create regional view map: user selects a region, sees isochrone + viewpoints.
+    Create regional view map: user selects a region from dropdown,
+    sees only viewpoints within that region's isochrone.
     """
     print("Creating regional map...")
 
-    # Load data
     best_sites = pd.read_csv(BEST_SITES_CSV)
     reachable = pd.read_csv(REACHABLE_CSV)
 
     # Create map centered on CZ
     m = folium.Map(location=[49.8, 15.5], zoom_start=7, tiles='OpenStreetMap')
 
-    # Add title
-    title_html = '''
+    # Title and dropdown
+    dropdown_html = '''
     <div style="position: fixed; top: 10px; left: 50px; z-index: 1000;
                 background: white; padding: 10px 15px; border-radius: 5px;
                 box-shadow: 0 0 10px rgba(0,0,0,0.3);">
-        <h3 style="margin: 0;">Perseidy - Výběr kraje</h3>
-        <p style="margin: 5px 0 0 0; font-size: 12px;">Klikni na hvězdičku pro izochronu daného kraje</p>
+        <h3 style="margin: 0 0 10px 0;">Perseidy - Výběr kraje</h3>
+        <select id="region-select" onchange="filterByRegion(this.value)"
+                style="padding: 8px; font-size: 14px;">
+            <option value="">-- Vyber kraj --</option>
+            '''
+    for region_label, city in CZECH_REGIONS:
+        dropdown_html += f'<option value="{city}">{region_label}</option>'
+    dropdown_html += '''
+        </select>
     </div>
+
+    <script>
+    var currentLayer = null;
+    function filterByRegion(region) {
+        if (currentLayer) {
+            map.removeLayer(currentLayer);
+        }
+        if (!region) {
+            return;
+        }
+        // This will be populated by Folium layers
+        var layerName = 'region_' + region;
+        if (window[layerName]) {
+            currentLayer = window[layerName];
+            currentLayer.addTo(map);
+            // Zoom to bounds
+            var group = new L.featureGroup(window[layerName].getLayers());
+            map.fitBounds(group.getBounds().pad(0.1));
+        }
+    }
+    </script>
     '''
-    m.get_root().html.add_child(folium.Element(title_html))
+    m.get_root().html.add_child(folium.Element(dropdown_html))
 
-    # Add isochrones as clickable layers
-    isochrone_group = folium.FeatureGroup(name="Isochrony")
+    # Add Falchi overlay
+    add_falchi_layer(m)
 
-    for _, row in best_sites.iterrows():
-        city = row['reachable_from_city']
+    # Group points by region
+    region_groups = {}
+    for city in [r[1] for r in CZECH_REGIONS]:
         geojson_file = ISOCHRONES_DIR / f"isochrone_{city}.geojson"
-
         if not geojson_file.exists():
             continue
 
         with open(geojson_file) as f:
             geojson_data = json.load(f)
 
-        # Create marker for the city
-        folium.Marker(
-            location=[row['lat'], row['lon']],
-            popup=f"<b>{city}</b><br>Nejtemnější místo: {row['name']}<br>Tma: {row['darkness_value']:.4f}",
-            icon=folium.Icon(color='red', icon='star', prefix='fa'),
-            tooltip=f'{city} - 1h izochrona'
-        ).add_to(isochrone_group)
+        # Get isochrone bounds for zooming
+        coords = geojson_data['features'][0]['geometry']['coordinates'][0]
+        lons = [c[0] for c in coords]
+        lats = [c[1] for c in coords]
+        min_lon, max_lon = min(lons), max(lons)
+        min_lat, max_lat = min(lats), max(lats)
 
-        # Add isochrone polygon
-        folium.GeoJson(
-            geojson_data,
-            name=f'Isochrone {city}',
-            style_function=lambda feature, c=city: {
-                'fillColor': '#ff6600',
-                'color': '#ff6600',
-                'weight': 2,
-                'fillOpacity': 0.15,
-            },
-            highlight_function=lambda x: {'fillOpacity': 0.3}
-        ).add_to(isochrone_group)
+        # Filter reachable sites for this region
+        region_sites = reachable[reachable['reachable_from_city'] == city]
+        region_sites = region_sites[region_sites['darkness_value'] < 0.16]
 
-    isochrone_group.add_to(m)
+        # Create GeoJSON for points in this region
+        features = []
+        for _, row in region_sites.iterrows():
+            val = row.get('darkness_value', None)
+            if val is None or pd.isna(val):
+                continue
+            color = get_falchi_color(val)
+            name = row.get('name', 'Unnamed POI')
+            popup_text = f"<b>{name}</b><br>Tma: {val:.4f}<br>{get_falchi_category(val)}"
 
-    # Add Falchi light pollution overlay
-    add_falchi_layer(m, opacity=0.5)
+            features.append({
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [row['lon'], row['lat']]
+                },
+                "properties": {
+                    "popup": popup_text,
+                    "color": color
+                }
+            })
 
-    # Add dark sites within this region (filtered by isochrone)
-    dark_sites_group = folium.FeatureGroup(name="Tmavá místa (< 0.16)")
+        if features:
+            point_layer = folium.GeoJson(
+                {"type": "FeatureCollection", "features": features},
+                name=f'Region: {city}',
+                style_function=lambda feature: {
+                    'color': '#333333',
+                    'weight': 1.5,
+                    'fillColor': feature['properties']['color'],
+                    'fillOpacity': 0.85
+                },
+                tooltip=folium.GeoJsonTooltip(fields=['popup'], aliases=[''])
+            )
+            point_layer.add_to(m)
 
-    for _, row in reachable.iterrows():
-        val = row.get('darkness_value', None)
-        if val is None or pd.isna(val) or val >= 0.16:
-            continue
+            # Store in window for JavaScript access
+            layer_id = f'region_{city}'
+            m.get_root().header.add_child(folium.Element(
+                f'<script>window["{layer_id}"] = {point_layer.get_name()};</script>'
+            ))
 
-        color = get_falchi_color(val)
-        name = row.get('name', 'Unnamed POI')
-        popup_text = f"<b>{name}</b><br>Tma: {val:.4f}<br>{get_falchi_category(val)}"
+    # Add legend
+    add_legend(m)
 
-        folium.CircleMarker(
-            location=[row['lat'], row['lon']],
-            radius=5,
-            color='#333333',
-            weight=1.5,
-            fill=True,
-            fill_color=color,
-            fill_opacity=0.85,
-            popup=folium.Popup(popup_text, max_width=300)
-        ).add_to(dark_sites_group)
-
-    dark_sites_group.add_to(m)
-
-    # Add layer control
+    # Layer control
     folium.LayerControl(collapsed=False).add_to(m)
 
-    # Save
     output_file = OUTPUT_DIR / "perseidy_regional.html"
     m.save(output_file)
     print(f"  Saved: {output_file}")
@@ -283,17 +287,19 @@ def create_regional_map():
 
 def create_full_cz_map():
     """
-    Create full CZ map: entire Czech Republic with Falchi background + all viewpoints.
-    User manually explores to find their spot.
+    Create full CZ map: entire Czech Republic with all viewpoints.
+    Highlights the darkest site in CZ.
     """
     print("Creating full CZ map...")
 
-    # Load viewpoints with darkness
     df = pd.read_csv(VIEWPOINTS_CSV)
 
-    # Filter to reasonable bounds for CZ
+    # Filter to CZ bounds
     df = df[(df['lat'] >= 48.5) & (df['lat'] <= 51.2)]
     df = df[(df['lon'] >= 12) & (df['lon'] <= 19)]
+
+    # Find darkest site
+    darkest_site = df[df['darkness_value'].notna()].sort_values('darkness_value').iloc[0]
 
     # Create map
     m = folium.Map(location=[49.8, 15.5], zoom_start=7, tiles='OpenStreetMap')
@@ -309,41 +315,21 @@ def create_full_cz_map():
     '''
     m.get_root().html.add_child(folium.Element(title_html))
 
-    # Legend
-    legend_html = '''
-    <div style="position: fixed; bottom: 30px; right: 10px; z-index: 1000;
-                background: white; padding: 10px; border-radius: 5px;
-                box-shadow: 0 0 10px rgba(0,0,0,0.3); font-size: 11px;">
-        <b>Světelné znečištění</b><br>
-        <i style="background: #000000"></i> Přirozená tma<br>
-        <i style="background: #00008B"></i> Slabé znečištění<br>
-        <i style="background: #0000FF"></i> Mírné znečištění<br>
-        <i style="background: #444AF8"></i> Střední znečištění<br>
-        <i style="background: #006400"></i> Znečištěná<br>
-        <i style="background: #FFFF00"></i> Silné znečištění<br>
-        <i style="background: #FF0000"></i> Velmi silné<br>
-    </div>
-    '''
-    m.get_root().html.add_child(folium.Element(legend_html))
+    # Add Falchi overlay
+    add_falchi_layer(m)
 
-    # Add Falchi light pollution overlay
-    add_falchi_layer(m, opacity=0.5)
+    # Group for layer control
+    dark_sites_group = folium.FeatureGroup(name="Výhledová místa (< 0.32)")
 
-    # Add all dark sites
     for _, row in df.iterrows():
         val = row.get('darkness_value', None)
-        if val is None or pd.isna(val):
-            continue
-
-        # Only show sites with darkness < 0.32 (reasonable for observation)
-        if val >= 0.32:
+        if val is None or pd.isna(val) or val >= 0.32:
             continue
 
         color = get_falchi_color(val)
         name = row.get('name', 'Unnamed POI')
         popup_text = f"<b>{name}</b><br>Tma: {val:.4f}<br>{get_falchi_category(val)}"
 
-        # Size based on darkness (darker = larger)
         radius = max(3, min(8, 10 - val * 30))
 
         folium.CircleMarker(
@@ -355,16 +341,43 @@ def create_full_cz_map():
             fill_color=color,
             fill_opacity=0.8,
             popup=folium.Popup(popup_text, max_width=300)
-        ).add_to(m)
+        ).add_to(dark_sites_group)
 
-    m.save(OUTPUT_DIR / "perseidy_full_cz.html")
-    print(f"  Saved: {OUTPUT_DIR / 'perseidy_full_cz.html'}")
-    return OUTPUT_DIR / "perseidy_full_cz.html"
+    dark_sites_group.add_to(m)
+
+    # Highlight darkest site
+    darkest_name = darkest_site.get('name', 'Unnamed POI')
+    darkest_val = darkest_site['darkness_value']
+    darkest_popup = f"""
+    <b>NEJTEMNĚJŠÍ MÍSTO V ČR</b><br>
+    <b>{darkest_name}</b><br>
+    Tma: {darkest_val:.4f}<br>
+    {get_falchi_category(darkest_val)}<br>
+    <i>Lat/Lon: {darkest_site['lat']:.4f}, {darkest_site['lon']:.4f}</i>
+    """
+
+    folium.Marker(
+        location=[darkest_site['lat'], darkest_site['lon']],
+        popup=folium.Popup(darkest_popup, max_width=350),
+        icon=folium.Icon(color='green', icon='star', prefix='fa'),
+        tooltip='Nejtemnější místo v ČR'
+    ).add_to(m)
+
+    # Add legend
+    add_legend(m)
+
+    # Layer control
+    folium.LayerControl(collapsed=False).add_to(m)
+
+    output_file = OUTPUT_DIR / "perseidy_full_cz.html"
+    m.save(output_file)
+    print(f"  Saved: {output_file}")
+    return output_file
 
 
 def create_top_sites_map():
     """
-    Create top sites map: table of darkest sites per city with markers.
+    Create top sites map: darkest sites per city with markers.
     """
     print("Creating top sites map...")
 
@@ -382,10 +395,12 @@ def create_top_sites_map():
     '''
     m.get_root().html.add_child(folium.Element(title_html))
 
-    # Add Falchi light pollution overlay
-    add_falchi_layer(m, opacity=0.5)
+    # Add Falchi overlay
+    add_falchi_layer(m)
 
-    # Add markers for best sites
+    # Group for sites
+    sites_group = folium.FeatureGroup(name="Nejtemnější místa per kraj")
+
     for _, row in best_sites.iterrows():
         val = row.get('darkness_value', None)
         if val is None or pd.isna(val):
@@ -407,11 +422,20 @@ def create_top_sites_map():
             popup=folium.Popup(popup_text, max_width=350),
             icon=folium.Icon(color='red', icon='star', prefix='fa'),
             tooltip=f'{city}: {name}'
-        ).add_to(m)
+        ).add_to(sites_group)
 
-    m.save(OUTPUT_DIR / "perseidy_top_sites.html")
-    print(f"  Saved: {OUTPUT_DIR / 'perseidy_top_sites.html'}")
-    return OUTPUT_DIR / "perseidy_top_sites.html"
+    sites_group.add_to(m)
+
+    # Add legend
+    add_legend(m)
+
+    # Layer control
+    folium.LayerControl(collapsed=False).add_to(m)
+
+    output_file = OUTPUT_DIR / "perseidy_top_sites.html"
+    m.save(output_file)
+    print(f"  Saved: {output_file}")
+    return output_file
 
 
 def main():
