@@ -204,6 +204,32 @@ https://github.com/DataRozhlas/divnovylety
 
 ---
 
+## TODO / Known Issues
+
+### ❌ Mapa s oblačností (nefunkční)
+
+Pokus o vytvoření interaktivní mapy s aktuální oblačností **selhal**. Problémy:
+
+| Přístup | Problém |
+|---------|---------|
+| **Open-Meteo API** (direct) | 5395 bodů × API call = rate limit po ~600 requestech |
+| **YR.no WMS** | Server neodpovídá / blokuje přístup |
+| **CHMI Aladin WMS** | Veřejný endpoint nedostupný |
+| **NASA GIBS WMS** | Blokováno CORS / vyžaduje autentizaci |
+| **Meteoblue WMS** | Nereaguje na GetCapabilities |
+
+**Důvod selhání:** Pro zveřejnění veřejné webové stránky potřebujeme buď:
+1. **Placené API** (OpenWeatherMap, Windy.com) — tokeny by byly rychle vyčerpány
+2. **Veřejný WMS server** — žádný z evropských meteorologických ústavů nemá otevřený bezplatný WMS pro ČR/Evropu
+3. **Self-hosted backend** — stahovat a cacheovat předpovědi na vlastním serveru
+
+**Možná řešení (budoucnost):**
+- Self-hostovaný backend (Node.js/Python) který cachejuje weather data každých 30 minut
+- Použití statických forecast obrázků (např. stáhnout PNG z YR.no každý den)
+- Integrace s CHMI pokud poskytnou veřejný endpoint
+
+---
+
 ## Changelog - Čištění dat vyhlídkových míst (2025-08-02)
 
 ### Problém
