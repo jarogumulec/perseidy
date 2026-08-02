@@ -10,8 +10,8 @@ from rasterio import open as rio_open
 from rasterio.mask import mask
 
 # Paths
-INPUT_TIFF = "/Users/jarogumulec/Library/CloudStorage/OneDrive-MUNI/Grafy Mapy/Mapy/QGIS_2026/World_Atlas_2015.tif"
-CZ_POLYGON_GEOJSON = "/Users/jarogumulec/Library/CloudStorage/OneDrive-MUNI/Grafy Mapy/Mapy/QGIS_2026/prac/prac_obrys_cesko.geojson"
+INPUT_TIFF = "World_Atlas_2015.tif"
+CZ_POLYGON_GEOJSON = "prac_obrys_cesko.geojson"
 OUTPUT_TIFF = str(Path(__file__).parent / "data" / "cesko_tma.tif")
 
 

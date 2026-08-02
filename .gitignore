@@ -33,3 +33,5 @@ Thumbs.db
 
 # Maps (optional - uncomment if you don't want to commit)
 # *.html
+
+config.py
