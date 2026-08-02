@@ -14,14 +14,25 @@ Projekt hledá optimální místa v České republice pro pozorování Perseid a
 - **Citace**: Původní článek: [10.1126/sciadv.1600377](https://doi.org/10.1126/sciadv.1600377)
 
 ### Výhledová místa
-- **Zdroj**: OpenStreetMap přes Overpass API
+- **Zdroj**: Michal Kašpárek / Data Rozhlas
+- **Originální CSV**: [divnovylety/vyhlidkova_mista_cr.csv](https://github.com/DataRozhlas/divnovylety/blob/b74d0d606e967e6b8bc3e9ca77bc8ff908ac0b04/data/vyhlidkova_mista_cr.csv)
+- **Extrahováno z**: OpenStreetMap přes Overpass API
 - **Kategorie**: `tourism=viewpoint`, `man_made=observation_tower`, `natural=peak`
-- **Ošetření**: Filtrování surveillance kamer a nesprávných tagů
 
 ### Izochrony
 - **Zdroj**: OpenRouteService API
 - **Profil**: Driving-car
 - **Časový interval**: 1 hodina od každého krajského města
+
+## Interaktivní mapy
+
+Po spuštění `create_html_maps.py` najdeš v `output/` tři varianty map:
+
+| Soubor | Popis |
+|--------|-------|
+| `perseidy_regional.html` | Výběr kraje + izochrona + tmavá místa v dosahu |
+| `perseidy_full_cz.html` | Celá ČR s výhledovými místy - "najdi si svoje místo" |
+| `perseidy_top_sites.html` | Nejtemnější místa per kraj s hvězdičkami |
 
 ## Klasifikace tmy (Falchi et al.)
 
@@ -41,23 +52,24 @@ Projekt hledá optimální místa v České republice pro pozorování Perseid a
 ```
 perseidy/
 ├── data/
-│   └── cesko_tma.tif          # Oříznutý Falchi rastr pro ČR (~50-100 MB)
+│   └── cesko_tma.tif          # Oříznutý Falchi rastr pro ČR (~1 MB)
 ├── isochrones/
 │   ├── isochrone_Praha.geojson
 │   ├── isochrone_Brno.geojson
 │   └── ...                      # Isochrony pro všech 14 krajů
 ├── output/
 │   ├── viewpoints_with_darkness.csv    # Všechna výhledová místa s hodnotou tmy
-│   ├── dark_sites.csv                  # Filtr: místa s tma < 0.16
-│   ├── reachable_dark_sites.csv        # Průnik: tmavá místa + dojezd < 1h
 │   ├── best_sites_per_city.csv         # Nejtemnější místo per kraj
-│   ├── dark_sites_map.html             # Interaktivní mapa
-│   └── all_isochrones_map.html         # Mapa s izochronami
-├── vyhlidkova_mista_cr.csv     # Zdrojová data výhledových míst
+│   ├── reachable_dark_sites.csv        # Průnik: tmavá místa + dojezd < 1h
+│   ├── perseidy_regional.html          # Mapa: výběr kraje + izochrona
+│   ├── perseidy_full_cz.html           # Mapa: celá ČR manuální hledání
+│   └── perseidy_top_sites.html         # Mapa: top místa per kraj
+├── vyhlidkova_mista_cr.csv     # Zdrojová data výhledových míst (od Michala)
 ├── krajska_mista.csv           # Krajská města pro izochrony
 ├── crop_falchi_to_cz.py        # Skript pro oříznutí GeoTIFF
 ├── generate_isochrones.py      # Generování izochron přes ORS API
 ├── analyze_dark_sites.py       # Hlavní analýza a průniky
+├── create_html_maps.py         # Generování HTML map
 ├── requirements.txt            # Python dependencies
 └── README.md
 ```
@@ -66,13 +78,11 @@ perseidy/
 
 ```bash
 # Vytvořit virtuální prostředí
-python -m venv .venv
-source .venv/bin/activate  # nebo Windows: .venv\Scripts\activate
+python3 -m venv .venv
+source .venv/bin/activate
 
 # Nainstalovat závislosti
 pip install -r requirements.txt
-
-# Přidat API klíč do config.py (viz níže)
 ```
 
 ## Konfigurace
@@ -90,18 +100,12 @@ API klíč získáš na: https://openrouteservice.org/dev/#/signup
 
 ### 1. Oříznutí GeoTIFF pro ČR
 
-Máš dvě možnosti:
-
-**A) V QGISu** (doporučeno pro rychlost):
-1. Načti `World_Atlas_2015.tif` do QGIS
-2. Vektor → Geoprocessing → Clip Raster by Mask Layer
-3. Jako masku zvol `prac_obrys_cesko.geojson`
-4. Výsledek ulož jako `data/cesko_tma.tif`
-
-**B) Python skriptem** (reprodukovatelnost):
+**Python skriptem:**
 ```bash
 python crop_falchi_to_cz.py
 ```
+
+Výsledek: `data/cesko_tma.tif` (~1 MB)
 
 ### 2. Generování izochron
 
@@ -120,25 +124,24 @@ python analyze_dark_sites.py
 
 Výstup:
 - CSV s nejlepšími místy per kraj
-- HTML interaktivní mapa
+- CSV se všemi body a jejich hodnotou tmy
 
-## Výstupy
+### 4. Vytvoření HTML map
 
-Po dokončení analýzy najdeš v `output/`:
+```bash
+python create_html_maps.py
+```
 
-| Soubor | Obsah |
-|--------|-------|
-| `best_sites_per_city.csv` | Nejtemnější dostupné místo pro každé krajské město |
-| `dark_sites_map.html` | Interaktivní mapa se všemi tmavými body |
-| `reachable_dark_sites.csv` | Všechna tmavá místa do 1h dojezdu |
+Výstup: 3 HTML mapy v `output/`
 
-## Použití v článku
+## Výstupy pro článek
 
-Pro datové novináře:
-
-1. **Statická tabulka**: `best_sites_per_city.csv` obsahuje top místo pro každý kraj
-2. **Interaktivní komponenta**: `dark_sites_map.html` lze embednout nebo zveřejnit na GitHub Pages
-3. **Izochrony**: `all_isochrones_map.html` ukazuje dosah z větších měst
+| Soubor | Použití |
+|--------|---------|
+| `best_sites_per_city.csv` | Statická tabulka: top místo pro každý kraj |
+| `perseidy_regional.html` | Interaktivní mapa: uživatel vybere kraj, vidí izochronu a tmavá místa |
+| `perseidy_full_cz.html` | Interaktivní mapa: prozkoumat celou ČR a najít vlastní místo |
+| `perseidy_top_sites.html` | Přehled nejtemnějších míst s hvězdičkami |
 
 ## Citace dat
 
@@ -153,10 +156,13 @@ Original scientific article: Falchi, F., et al. (2016).
 The new world atlas of artificial night sky brightness.
 Science Advances, 2(6), e1600377.
 https://doi.org/10.1126/sciadv.1600377
+
+Data výhledových míst: Michal Kašpárek / Český rozhlas
+https://github.com/DataRozhlas/divnovylety
 ```
 
 ## Autoři
 
 - Jaromír Gumulec (analýza, skripty)
 - Michal Kašpárek (data výhledových míst, UX)
-- Petr Kočí (produkce, článkek)
+- Petr Kočí (produkce, článek)

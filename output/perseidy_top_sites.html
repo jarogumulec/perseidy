@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_f681dd85429b0e52ea752d9e5852b034 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+    <div style="position: fixed; top: 10px; left: 50px; z-index: 1000;
+                background: white; padding: 10px 15px; border-radius: 5px;
+                box-shadow: 0 0 10px rgba(0,0,0,0.3);">
+        <h3 style="margin: 0;">Perseidy - Nejtemnější místa per kraj</h3>
+    </div>
+    
+    
+            <div class="folium-map" id="map_f681dd85429b0e52ea752d9e5852b034" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_f681dd85429b0e52ea752d9e5852b034 = L.map(
+                "map_f681dd85429b0e52ea752d9e5852b034",
+                {
+                    center: [49.8, 15.5],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 7,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_6899a0e2ac0b9ca3a370ed5faae3fcdd = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_6899a0e2ac0b9ca3a370ed5faae3fcdd.addTo(map_f681dd85429b0e52ea752d9e5852b034);
+        
+    
+            var marker_ce336b8cfd96d7d5fe4f523c33952687 = L.marker(
+                [48.6474923, 14.6171881],
+                {
+}
+            ).addTo(map_f681dd85429b0e52ea752d9e5852b034);
+        
+    
+            var icon_f4cf967102efbf07607ba64c5313026d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_4c997eb473d0338a2a28332ddf0f3c53 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_7720b3da14ff67068638bf651ac25e51 = $(`<div id="html_7720b3da14ff67068638bf651ac25e51" style="width: 100.0%; height: 100.0%;">         <b>České Budějovice</b><br>         <b>Unnamed POI</b><br>         Tma: 0.0408<br>         Slabé znečištění<br>         <i>Lat/Lon: 48.6475, 14.6172</i>         </div>`)[0];
+                popup_4c997eb473d0338a2a28332ddf0f3c53.setContent(html_7720b3da14ff67068638bf651ac25e51);
+            
+        
+
+        marker_ce336b8cfd96d7d5fe4f523c33952687.bindPopup(popup_4c997eb473d0338a2a28332ddf0f3c53)
+        ;
+
+        
+    
+    
+            marker_ce336b8cfd96d7d5fe4f523c33952687.bindTooltip(
+                `<div>
+                     České Budějovice: Unnamed POI
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ce336b8cfd96d7d5fe4f523c33952687.setIcon(icon_f4cf967102efbf07607ba64c5313026d);
+            
+    
+            var marker_ada42adefdf60ec723d8930e6ff3545f = L.marker(
+                [49.6071735, 12.8284678],
+                {
+}
+            ).addTo(map_f681dd85429b0e52ea752d9e5852b034);
+        
+    
+            var icon_1aeaecfb1987270f3c124a90d76460c2 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_4b9788bec87888a38ed22ba5c51aa744 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_a8c8cbdbefd068466e5c70d297d2fa73 = $(`<div id="html_a8c8cbdbefd068466e5c70d297d2fa73" style="width: 100.0%; height: 100.0%;">         <b>Plzeň</b><br>         <b>Bývalá rozhledna Vidice</b><br>         Tma: 0.0523<br>         Slabé znečištění<br>         <i>Lat/Lon: 49.6072, 12.8285</i>         </div>`)[0];
+                popup_4b9788bec87888a38ed22ba5c51aa744.setContent(html_a8c8cbdbefd068466e5c70d297d2fa73);
+            
+        
+
+        marker_ada42adefdf60ec723d8930e6ff3545f.bindPopup(popup_4b9788bec87888a38ed22ba5c51aa744)
+        ;
+
+        
+    
+    
+            marker_ada42adefdf60ec723d8930e6ff3545f.bindTooltip(
+                `<div>
+                     Plzeň: Bývalá rozhledna Vidice
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ada42adefdf60ec723d8930e6ff3545f.setIcon(icon_1aeaecfb1987270f3c124a90d76460c2);
+            
+    
+            var marker_dc610e2b119248f602eee8bcce98b724 = L.marker(
+                [49.9617122, 12.966431],
+                {
+}
+            ).addTo(map_f681dd85429b0e52ea752d9e5852b034);
+        
+    
+            var icon_d4dd1743a355b0572cba139b498d3c39 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_7944ce6781df29885947fe18c2643098 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_8f83c8ac59bcdb7907cdf1daceab7b9f = $(`<div id="html_8f83c8ac59bcdb7907cdf1daceab7b9f" style="width: 100.0%; height: 100.0%;">         <b>Karlovy Vary</b><br>         <b>Unnamed POI</b><br>         Tma: 0.0526<br>         Slabé znečištění<br>         <i>Lat/Lon: 49.9617, 12.9664</i>         </div>`)[0];
+                popup_7944ce6781df29885947fe18c2643098.setContent(html_8f83c8ac59bcdb7907cdf1daceab7b9f);
+            
+        
+
+        marker_dc610e2b119248f602eee8bcce98b724.bindPopup(popup_7944ce6781df29885947fe18c2643098)
+        ;
+
+        
+    
+    
+            marker_dc610e2b119248f602eee8bcce98b724.bindTooltip(
+                `<div>
+                     Karlovy Vary: Unnamed POI
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_dc610e2b119248f602eee8bcce98b724.setIcon(icon_d4dd1743a355b0572cba139b498d3c39);
+            
+    
+            var marker_f80f789d0be4d47d0190ce8160636e30 = L.marker(
+                [49.4623456, 14.1963385],
+                {
+}
+            ).addTo(map_f681dd85429b0e52ea752d9e5852b034);
+        
+    
+            var icon_2c47cecec9b1832961517d3c470dd3e5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f19182d6fe094cb9d7359dc52f8c03b1 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_2f5e5a366c8ffb6787325b5e76b5ed50 = $(`<div id="html_2f5e5a366c8ffb6787325b5e76b5ed50" style="width: 100.0%; height: 100.0%;">         <b>Příbram</b><br>         <b>Unnamed POI</b><br>         Tma: 0.0562<br>         Slabé znečištění<br>         <i>Lat/Lon: 49.4623, 14.1963</i>         </div>`)[0];
+                popup_f19182d6fe094cb9d7359dc52f8c03b1.setContent(html_2f5e5a366c8ffb6787325b5e76b5ed50);
+            
+        
+
+        marker_f80f789d0be4d47d0190ce8160636e30.bindPopup(popup_f19182d6fe094cb9d7359dc52f8c03b1)
+        ;
+
+        
+    
+    
+            marker_f80f789d0be4d47d0190ce8160636e30.bindTooltip(
+                `<div>
+                     Příbram: Unnamed POI
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f80f789d0be4d47d0190ce8160636e30.setIcon(icon_2c47cecec9b1832961517d3c470dd3e5);
+            
+    
+            var marker_da467c935a61715ac203ac3e93ce68d1 = L.marker(
+                [49.2243631, 15.3367514],
+                {
+}
+            ).addTo(map_f681dd85429b0e52ea752d9e5852b034);
+        
+    
+            var icon_9dcd00d84b36c7edda1b892dc8473cfa = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_fb8d57e35acf14b9ca96b3c830f7bf20 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_75086e069f07a38ccebdde6c49e84de7 = $(`<div id="html_75086e069f07a38ccebdde6c49e84de7" style="width: 100.0%; height: 100.0%;">         <b>Jihlava</b><br>         <b>Unnamed POI</b><br>         Tma: 0.0644<br>         Slabé znečištění<br>         <i>Lat/Lon: 49.2244, 15.3368</i>         </div>`)[0];
+                popup_fb8d57e35acf14b9ca96b3c830f7bf20.setContent(html_75086e069f07a38ccebdde6c49e84de7);
+            
+        
+
+        marker_da467c935a61715ac203ac3e93ce68d1.bindPopup(popup_fb8d57e35acf14b9ca96b3c830f7bf20)
+        ;
+
+        
+    
+    
+            marker_da467c935a61715ac203ac3e93ce68d1.bindTooltip(
+                `<div>
+                     Jihlava: Unnamed POI
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_da467c935a61715ac203ac3e93ce68d1.setIcon(icon_9dcd00d84b36c7edda1b892dc8473cfa);
+            
+    
+            var marker_403c16de6de9f040986d5869eee35f8c = L.marker(
+                [49.2480659, 18.1124203],
+                {
+}
+            ).addTo(map_f681dd85429b0e52ea752d9e5852b034);
+        
+    
+            var icon_6f6c7078c212f4fe9e6d7f6937ea5b3c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_bb03029d008face035cf86aa92320d74 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_8d1999bfb246df3b52f52eb5ee049077 = $(`<div id="html_8d1999bfb246df3b52f52eb5ee049077" style="width: 100.0%; height: 100.0%;">         <b>Zlín</b><br>         <b>Unnamed POI</b><br>         Tma: 0.0761<br>         Slabé znečištění<br>         <i>Lat/Lon: 49.2481, 18.1124</i>         </div>`)[0];
+                popup_bb03029d008face035cf86aa92320d74.setContent(html_8d1999bfb246df3b52f52eb5ee049077);
+            
+        
+
+        marker_403c16de6de9f040986d5869eee35f8c.bindPopup(popup_bb03029d008face035cf86aa92320d74)
+        ;
+
+        
+    
+    
+            marker_403c16de6de9f040986d5869eee35f8c.bindTooltip(
+                `<div>
+                     Zlín: Unnamed POI
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_403c16de6de9f040986d5869eee35f8c.setIcon(icon_6f6c7078c212f4fe9e6d7f6937ea5b3c);
+            
+    
+            var marker_08e24755b03d79ef0d05743f439eca24 = L.marker(
+                [49.3989723, 18.3961098],
+                {
+}
+            ).addTo(map_f681dd85429b0e52ea752d9e5852b034);
+        
+    
+            var icon_9d938d249aa44152d418300d28080aea = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_6b0b8256cf782f22dba6cc23c762bb47 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_6cd44914cc2f90500b31c8ff5f009a12 = $(`<div id="html_6cd44914cc2f90500b31c8ff5f009a12" style="width: 100.0%; height: 100.0%;">         <b>Ostrava</b><br>         <b>Rozhledna Sukenická</b><br>         Tma: 0.0800<br>         Slabé znečištění<br>         <i>Lat/Lon: 49.3990, 18.3961</i>         </div>`)[0];
+                popup_6b0b8256cf782f22dba6cc23c762bb47.setContent(html_6cd44914cc2f90500b31c8ff5f009a12);
+            
+        
+
+        marker_08e24755b03d79ef0d05743f439eca24.bindPopup(popup_6b0b8256cf782f22dba6cc23c762bb47)
+        ;
+
+        
+    
+    
+            marker_08e24755b03d79ef0d05743f439eca24.bindTooltip(
+                `<div>
+                     Ostrava: Rozhledna Sukenická
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_08e24755b03d79ef0d05743f439eca24.setIcon(icon_9d938d249aa44152d418300d28080aea);
+            
+    
+            var marker_9e729618cff16117ee0a7711e8d0b194 = L.marker(
+                [49.7703707, 16.0426489],
+                {
+}
+            ).addTo(map_f681dd85429b0e52ea752d9e5852b034);
+        
+    
+            var icon_737ace973bf620bed0f3c7f8bdbc3eed = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_69ac8bf4dc1c19e340c3627515f5ed03 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_b3382e45db8ad0596a13eb95797fc28d = $(`<div id="html_b3382e45db8ad0596a13eb95797fc28d" style="width: 100.0%; height: 100.0%;">         <b>Pardubice</b><br>         <b>Unnamed POI</b><br>         Tma: 0.0871<br>         Mírné znečištění<br>         <i>Lat/Lon: 49.7704, 16.0426</i>         </div>`)[0];
+                popup_69ac8bf4dc1c19e340c3627515f5ed03.setContent(html_b3382e45db8ad0596a13eb95797fc28d);
+            
+        
+
+        marker_9e729618cff16117ee0a7711e8d0b194.bindPopup(popup_69ac8bf4dc1c19e340c3627515f5ed03)
+        ;
+
+        
+    
+    
+            marker_9e729618cff16117ee0a7711e8d0b194.bindTooltip(
+                `<div>
+                     Pardubice: Unnamed POI
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_9e729618cff16117ee0a7711e8d0b194.setIcon(icon_737ace973bf620bed0f3c7f8bdbc3eed);
+            
+    
+            var marker_11d14eeea93f2b2ed52747ca2d3d90a1 = L.marker(
+                [49.8648014, 17.3700736],
+                {
+}
+            ).addTo(map_f681dd85429b0e52ea752d9e5852b034);
+        
+    
+            var icon_0cd183f5e84fa3e7ad6f05f16204e939 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e0b9266ba1128abe0047e9bac7482b19 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_5cfec503f04f3182025954c63cc77871 = $(`<div id="html_5cfec503f04f3182025954c63cc77871" style="width: 100.0%; height: 100.0%;">         <b>Olomouc</b><br>         <b>Unnamed POI</b><br>         Tma: 0.0899<br>         Mírné znečištění<br>         <i>Lat/Lon: 49.8648, 17.3701</i>         </div>`)[0];
+                popup_e0b9266ba1128abe0047e9bac7482b19.setContent(html_5cfec503f04f3182025954c63cc77871);
+            
+        
+
+        marker_11d14eeea93f2b2ed52747ca2d3d90a1.bindPopup(popup_e0b9266ba1128abe0047e9bac7482b19)
+        ;
+
+        
+    
+    
+            marker_11d14eeea93f2b2ed52747ca2d3d90a1.bindTooltip(
+                `<div>
+                     Olomouc: Unnamed POI
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_11d14eeea93f2b2ed52747ca2d3d90a1.setIcon(icon_0cd183f5e84fa3e7ad6f05f16204e939);
+            
+    
+            var marker_397a164111772ccd069fd1c789c08206 = L.marker(
+                [49.8027498, 16.1684825],
+                {
+}
+            ).addTo(map_f681dd85429b0e52ea752d9e5852b034);
+        
+    
+            var icon_5092253e79a0fd5b6729995a6099fc8a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ee62b41583455f04bfeb762f52f7911f = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_007f89440345101f67b7a8baa34ae640 = $(`<div id="html_007f89440345101f67b7a8baa34ae640" style="width: 100.0%; height: 100.0%;">         <b>Hradec Králové</b><br>         <b>Zámeček</b><br>         Tma: 0.0943<br>         Mírné znečištění<br>         <i>Lat/Lon: 49.8027, 16.1685</i>         </div>`)[0];
+                popup_ee62b41583455f04bfeb762f52f7911f.setContent(html_007f89440345101f67b7a8baa34ae640);
+            
+        
+
+        marker_397a164111772ccd069fd1c789c08206.bindPopup(popup_ee62b41583455f04bfeb762f52f7911f)
+        ;
+
+        
+    
+    
+            marker_397a164111772ccd069fd1c789c08206.bindTooltip(
+                `<div>
+                     Hradec Králové: Zámeček
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_397a164111772ccd069fd1c789c08206.setIcon(icon_5092253e79a0fd5b6729995a6099fc8a);
+            
+    
+            var marker_0792f1a35917b5f749a1014af4274766 = L.marker(
+                [49.5857631, 15.2559563],
+                {
+}
+            ).addTo(map_f681dd85429b0e52ea752d9e5852b034);
+        
+    
+            var icon_de576f60bd8e447ac1a9057d3d8d01cc = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_fb12bb86e2972cb1070e547d89d27126 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_69968a9b48df5d4dbcffd254bf965d53 = $(`<div id="html_69968a9b48df5d4dbcffd254bf965d53" style="width: 100.0%; height: 100.0%;">         <b>Praha</b><br>         <b>Unnamed POI</b><br>         Tma: 0.0946<br>         Mírné znečištění<br>         <i>Lat/Lon: 49.5858, 15.2560</i>         </div>`)[0];
+                popup_fb12bb86e2972cb1070e547d89d27126.setContent(html_69968a9b48df5d4dbcffd254bf965d53);
+            
+        
+
+        marker_0792f1a35917b5f749a1014af4274766.bindPopup(popup_fb12bb86e2972cb1070e547d89d27126)
+        ;
+
+        
+    
+    
+            marker_0792f1a35917b5f749a1014af4274766.bindTooltip(
+                `<div>
+                     Praha: Unnamed POI
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_0792f1a35917b5f749a1014af4274766.setIcon(icon_de576f60bd8e447ac1a9057d3d8d01cc);
+            
+    
+            var marker_ab2f9c4b5a17c08a9422d7b53d343ead = L.marker(
+                [49.4308535, 16.2314435],
+                {
+}
+            ).addTo(map_f681dd85429b0e52ea752d9e5852b034);
+        
+    
+            var icon_f4498c0a6820b3a71a4131e6f0704ddb = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e3208ca5e024039c7ae55ff2c5184d0d = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_52ff707c658317bef012adf4c553c762 = $(`<div id="html_52ff707c658317bef012adf4c553c762" style="width: 100.0%; height: 100.0%;">         <b>Brno</b><br>         <b>Unnamed POI</b><br>         Tma: 0.0952<br>         Mírné znečištění<br>         <i>Lat/Lon: 49.4309, 16.2314</i>         </div>`)[0];
+                popup_e3208ca5e024039c7ae55ff2c5184d0d.setContent(html_52ff707c658317bef012adf4c553c762);
+            
+        
+
+        marker_ab2f9c4b5a17c08a9422d7b53d343ead.bindPopup(popup_e3208ca5e024039c7ae55ff2c5184d0d)
+        ;
+
+        
+    
+    
+            marker_ab2f9c4b5a17c08a9422d7b53d343ead.bindTooltip(
+                `<div>
+                     Brno: Unnamed POI
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ab2f9c4b5a17c08a9422d7b53d343ead.setIcon(icon_f4498c0a6820b3a71a4131e6f0704ddb);
+            
+    
+            var marker_a0047d514ff2febaf673ab9e487d56ac = L.marker(
+                [50.8637686, 14.3811926],
+                {
+}
+            ).addTo(map_f681dd85429b0e52ea752d9e5852b034);
+        
+    
+            var icon_deaa943c365dc08c4a4a803d3faff7a2 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_90009f0b483e1b872d801637cf960df4 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_2e1259d56a503c2d132ee988c198a2f8 = $(`<div id="html_2e1259d56a503c2d132ee988c198a2f8" style="width: 100.0%; height: 100.0%;">         <b>Ústí nad Labem</b><br>         <b>Unnamed POI</b><br>         Tma: 0.1002<br>         Mírné znečištění<br>         <i>Lat/Lon: 50.8638, 14.3812</i>         </div>`)[0];
+                popup_90009f0b483e1b872d801637cf960df4.setContent(html_2e1259d56a503c2d132ee988c198a2f8);
+            
+        
+
+        marker_a0047d514ff2febaf673ab9e487d56ac.bindPopup(popup_90009f0b483e1b872d801637cf960df4)
+        ;
+
+        
+    
+    
+            marker_a0047d514ff2febaf673ab9e487d56ac.bindTooltip(
+                `<div>
+                     Ústí nad Labem: Unnamed POI
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_a0047d514ff2febaf673ab9e487d56ac.setIcon(icon_deaa943c365dc08c4a4a803d3faff7a2);
+            
+    
+            var marker_0c738149c33fb74ab41170d0e3ed3256 = L.marker(
+                [50.8431559, 14.4902554],
+                {
+}
+            ).addTo(map_f681dd85429b0e52ea752d9e5852b034);
+        
+    
+            var icon_8cd5c36f97a5c1f50f004e6d91f9236f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_554499b0b6d2ce64ce40a408b16e1275 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_6167df3542bde632b0ae1f96b82865ce = $(`<div id="html_6167df3542bde632b0ae1f96b82865ce" style="width: 100.0%; height: 100.0%;">         <b>Liberec</b><br>         <b>Unnamed POI</b><br>         Tma: 0.1144<br>         Mírné znečištění<br>         <i>Lat/Lon: 50.8432, 14.4903</i>         </div>`)[0];
+                popup_554499b0b6d2ce64ce40a408b16e1275.setContent(html_6167df3542bde632b0ae1f96b82865ce);
+            
+        
+
+        marker_0c738149c33fb74ab41170d0e3ed3256.bindPopup(popup_554499b0b6d2ce64ce40a408b16e1275)
+        ;
+
+        
+    
+    
+            marker_0c738149c33fb74ab41170d0e3ed3256.bindTooltip(
+                `<div>
+                     Liberec: Unnamed POI
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_0c738149c33fb74ab41170d0e3ed3256.setIcon(icon_8cd5c36f97a5c1f50f004e6d91f9236f);
+            
+</script>
+</html>
