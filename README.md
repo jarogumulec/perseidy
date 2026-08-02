@@ -5,6 +5,19 @@ Projekt hledá optimální místa v České republice pro pozorování Perseid a
 - **Výhledových míst** z OSM (rozhledny, vyhlídky, vrcholy)
 - **Dostupnosti** (izochrony dojezdu z krajských měst)
 
+## Proč právě Falchi atlas? (i když data jsou z roku 2015)
+
+Při výběru datasetu pro světelné znečištění jsme narazili na modernější alternativy jako VIIRS Black Marble nebo WorldPop. Zásadní rozdíl:
+
+| Dataset | Co měří | Vhodné pro astronomy? |
+|---------|---------|----------------------|
+| **Falchi 2015** | Jas noční oblohy (skyglow) po atmosférickém rozptylu | ✅ ANO - přímo to, co vidíš nad hlavou |
+| **VIIRS / Black Marble** | Světlo vycházející ze země směrem vzhůru | ❌ NE - ukazuje města/ulice, ne kvalitu oblohy |
+
+Pro astronomii není podstatné kolik světla vychází ze zemského povrchu, ale jak světlá je obloha nad tebou. Mezi těmito dvěma veličinami leží atmosférický rozptyl - a právě ten Falchi modeluje.
+
+**Závěr:** I když jsou Falchi data z roku 2015, stále poskytují smysluplnější informaci pro výběr pozorovacích lokalit než aktuálnější VIIRS rastry. Relativní pořadí tmavých oblastí v ČR se za posledních 10 let významně nezměnilo.
+
 ## Datové zdroje
 
 ### Světelné znečištění
@@ -30,9 +43,14 @@ Po spuštění `create_html_maps.py` najdeš v `output/` tři varianty map:
 
 | Soubor | Popis |
 |--------|-------|
-| `perseidy_regional.html` | Výběr kraje + izochrona + tmavá místa v dosahu |
+| `perseidy_regional.html` | Mapa ČR s vrstvami - zaškrtávací menu vlevo, legenda vpravo dole |
 | `perseidy_full_cz.html` | Celá ČR s výhledovými místy - "najdi si svoje místo" |
-| `perseidy_top_sites.html` | Nejtemnější místa per kraj s hvězdičkami |
+| `perseidy_top_sites.html` | Nejtemnější místa per kraj s přehledovou tabulkou |
+
+**Vlastnosti všech map:**
+- **Dark/Light toggle**: Tlačítko vpravo nahoře pro přepnutí světlé/tmavé podkladové mapy
+- **Layer control**: Zaškrtávací seznam vrstev (Světelné znečištění, Izochrony, Rozhledová místa)
+- **Legenda**: Kompaktní barevná škála Falchi vpravo dole
 
 ## Klasifikace tmy (Falchi et al.)
 
@@ -164,5 +182,4 @@ https://github.com/DataRozhlas/divnovylety
 ## Autoři
 
 - Jaromír Gumulec (analýza, skripty)
-- Michal Kašpárek (data výhledových míst, UX)
-- Petr Kočí (produkce, článek)
+- Michal Kašpárek (data výhledových míst)
