@@ -1,0 +1,17 @@
+[project]
+name = "perseidy"
+version = "0.1.0"
+description = "Analyza tmavych mist v CR pro pozorovani meteorickych roju"
+requires-python = ">=3.10"
+dependencies = [
+    "requests>=2.31.0",
+    "folium>=0.14.0",
+    "pandas>=2.0.0",
+    "geopandas>=0.14.0",
+    "rasterio>=1.3.0",
+    "gpxpy>=1.6.0",
+    "numpy>=1.24.0",
+]
+
+[tool.uv]
+package = false

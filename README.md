@@ -92,19 +92,22 @@ perseidy/
 ├── generate_isochrones.py      # Generování izochron přes ORS API
 ├── analyze_dark_sites.py       # Hlavní analýza a průniky
 ├── create_html_maps.py         # Generování HTML map
-├── requirements.txt            # Python dependencies
+├── pyproject.toml              # Python dependencies (uv)
+├── uv.lock                     # Zamcene verze zavislosti (uv)
 └── README.md
 ```
 
 ## Instalace
 
 ```bash
-# Vytvořit virtuální prostředí
-python3 -m venv .venv
+# Synchronizace prostředí podle pyproject.toml/uv.lock
+uv sync
+
+# (Volitelné) aktivace prostředí
 source .venv/bin/activate
 
-# Nainstalovat závislosti
-pip install -r requirements.txt
+# Přidání nové závislosti
+uv add nazev-balicku
 ```
 
 ## Konfigurace
@@ -124,7 +127,7 @@ API klíč získáš na: https://openrouteservice.org/dev/#/signup
 
 **Python skriptem:**
 ```bash
-python crop_falchi_to_cz.py
+uv run python crop_falchi_to_cz.py
 ```
 
 Výsledek: `data/cesko_tma.tif` (~1 MB)
@@ -134,7 +137,7 @@ Výsledek: `data/cesko_tma.tif` (~1 MB)
 Pokud chceš použít čerstvá vyčištěná data:
 
 ```bash
-python clean_viewpoints.py
+uv run python clean_viewpoints.py
 ```
 
 Výstup:
@@ -146,7 +149,7 @@ Výstup:
 ### 3. Generování izochron
 
 ```bash
-python generate_isochrones.py
+uv run python generate_isochrones.py
 ```
 
 Tento krok volá OpenRouteService API 14× (jednou pro každé krajské město).  
@@ -155,7 +158,7 @@ Tento krok volá OpenRouteService API 14× (jednou pro každé krajské město).
 ### 3. Analýza a průniky
 
 ```bash
-python analyze_dark_sites.py
+uv run python analyze_dark_sites.py
 ```
 
 Výstup:
@@ -165,7 +168,7 @@ Výstup:
 ### 4. Vytvoření HTML map
 
 ```bash
-python create_html_maps.py
+uv run python create_html_maps.py
 ```
 
 Výstup: 3 HTML mapy v `output/`
