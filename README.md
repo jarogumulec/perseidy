@@ -166,6 +166,7 @@ Naměřený dopad (aktuální data):
 - clean reference: `5395` bodů
 - astronomy strict: `993` bodů
 - vypadlo proti clean: `4402` bodů (`81.59 %`)
+- Pořád dost - cca 5 - v izochroně Praha
 
 ### 3. Generování izochron
 
