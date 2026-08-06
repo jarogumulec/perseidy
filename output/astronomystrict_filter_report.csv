@@ -1,0 +1,16 @@
+metric,value
+input_total,17521.0
+clean_reference_total,5395.0
+astronomystrict_total,993.0
+drop_vs_input_count,16528.0
+drop_vs_input_pct,94.33
+drop_vs_clean_count,4402.0
+drop_vs_clean_pct,81.59
+filtered_reason::not_viewpoint_or_peak,12246.0
+filtered_reason::unnamed_or_unusable_name,3928.0
+filtered_reason::kept,993.0
+filtered_reason::tower_tag,281.0
+filtered_reason::tower_like_name,45.0
+filtered_reason::non_astronomy_name,16.0
+filtered_reason::forest_like_name,9.0
+filtered_reason::restricted_access,3.0

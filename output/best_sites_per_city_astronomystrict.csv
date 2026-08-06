@@ -1,0 +1,19 @@
+name,lat,lon,darkness_value,falchi_category,reachable_from_city,addr_city
+U Ludvických Hor,48.6598,14.6008,0.04466667026281357,Tmavě modrá (Slabé znečištění),České Budějovice,Unknown
+Hraběcí kříž,50.0399,13.2961,0.05812970921397209,Tmavě modrá (Slabé znečištění),Karlovy Vary,Unknown
+Hraběcí kříž,50.0399,13.2961,0.05812970921397209,Tmavě modrá (Slabé znečištění),Plzeň,Unknown
+Na Vlčí skále,49.438,14.1984,0.05956120789051056,Tmavě modrá (Slabé znečištění),Příbram,Unknown
+Hubertova Vyhlídka,49.1649,15.5608,0.06724444776773453,Tmavě modrá (Slabé znečištění),Jihlava,Unknown
+Zbojnická,49.4363,18.4647,0.08723567426204681,Modrá (Mírné znečištění),Ostrava,Unknown
+Zbojnická,49.4363,18.4647,0.08723567426204681,Modrá (Mírné znečištění),koprivnice_60min,Unknown
+Vojtěchův kopec,49.7281,15.9773,0.08970049768686295,Modrá (Mírné znečištění),Pardubice,Unknown
+Zámeček,49.8027,16.1685,0.09427444636821747,Modrá (Mírné znečištění),Hradec Králové,Unknown
+Křížový vrch,49.8629,17.1784,0.09991060197353363,Modrá (Mírné znečištění),Olomouc,Unknown
+Výří skála,49.45,16.3021,0.10273100435733795,Modrá (Mírné znečištění),brno_60min,Unknown
+Výří skála,49.45,16.3021,0.10273100435733795,Modrá (Mírné znečištění),Brno,Unknown
+Pozorovatelna Durch,49.1467,18.0791,0.10370001941919327,Modrá (Mírné znečištění),Zlín,Unknown
+Treppenstein,50.8598,14.3936,0.10520810633897781,Modrá (Mírné znečištění),Ústí nad Labem,Unknown
+"výhled Jedlová, Sokol",50.8237,14.5028,0.12138499319553375,Modrá (Mírné znečištění),Liberec,Unknown
+Výhled na Vlašim,49.725,14.8453,0.12403394281864166,Modrá (Mírné znečištění),Praha,Unknown
+Babylon,49.3848,16.3598,0.13611213862895966,Modrá (Mírné znečištění),brno_45min,Unknown
+Výhled na Beskydy,49.6306,17.7128,0.1482616811990738,Modrá (Mírné znečištění),koprivnice_45min,Unknown

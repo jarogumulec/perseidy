@@ -1,0 +1,380 @@
+name,lat,lon,darkness_value,falchi_category,reachable_from_city,addr_city
+Krásná Máří,50.8524,15.182,0.13954967260360718,Modrá (Mírné znečištění),Liberec,Unknown
+Tolštejn,50.8569,14.5817,0.13970156013965607,Modrá (Mírné znečištění),Liberec,Unknown
+Holubník,50.8407,15.1835,0.1348344385623932,Modrá (Mírné znečištění),Liberec,Unknown
+Ptačí kupy,50.847,15.1737,0.14267100393772125,Modrá (Mírné znečištění),Liberec,Unknown
+Čertův odpočinek,50.8245,15.213,0.13225889205932617,Modrá (Mírné znečištění),Liberec,Unknown
+Pechova vyhlídka,50.4667,15.2868,0.14626269042491913,Modrá (Mírné znečištění),Liberec,Unknown
+vyhlídka Míru,50.4666,15.2912,0.14626269042491913,Modrá (Mírné znečištění),Liberec,Unknown
+vyhlídka Českého ráje,50.4667,15.2897,0.14626269042491913,Modrá (Mírné znečištění),Liberec,Unknown
+Hlaholská vyhlídka,50.467,15.2957,0.15158526599407196,Modrá (Mírné znečištění),Liberec,Unknown
+Všetečkova vyhlídka,50.4677,15.2906,0.14626269042491913,Modrá (Mírné znečištění),Liberec,Unknown
+Vyhlídka pražského pěveckého sboru Křížkovský,50.4664,15.2992,0.15158526599407196,Modrá (Mírné znečištění),Liberec,Unknown
+Hradčanská vyhlídka,50.6179,14.6976,0.1396275758743286,Modrá (Mírné znečištění),Liberec,Unknown
+Bílá skála,50.7396,15.3753,0.13165071606636047,Modrá (Mírné znečištění),Liberec,Unknown
+BOROVSKÉ SKÁLY,50.731,15.4057,0.130785271525383,Modrá (Mírné znečištění),Liberec,Unknown
+Skalní vyhlídka,50.7504,15.3758,0.12804517149925232,Modrá (Mírné znečištění),Liberec,Unknown
+Vyhlídka Liška,50.7199,15.4489,0.12245185673236847,Modrá (Mírné znečištění),Liberec,Unknown
+Výhled na Štěpánku,50.7619,15.3618,0.13869032263755798,Modrá (Mírné znečištění),Liberec,Unknown
+Vyhlidka na Český ráj,50.5678,15.2993,0.14691896736621857,Modrá (Mírné znečištění),Liberec,Unknown
+Holenická vyhlídka na Trosky,50.5217,15.3168,0.14293339848518372,Modrá (Mírné znečištění),Liberec,Unknown
+Bosenská skála,50.7362,15.384,0.129878431558609,Modrá (Mírné znečištění),Liberec,Unknown
+Taková hezká skála,50.6034,14.9754,0.15755800902843475,Modrá (Mírné znečištění),Liberec,Unknown
+Ervínův hrad,50.4676,15.2743,0.1397933065891266,Modrá (Mírné znečištění),Liberec,Unknown
+Schlikova vyhlídka,50.4679,15.2904,0.14626269042491913,Modrá (Mírné znečištění),Liberec,Unknown
+Lípa svobody,50.4902,15.3155,0.14957362413406372,Modrá (Mírné znečištění),Liberec,Unknown
+Vyhlídkový altán,50.6849,15.4043,0.1298525333404541,Modrá (Mírné znečištění),Liberec,Unknown
+Seifertova vyhlídka,50.4704,15.2919,0.15158526599407196,Modrá (Mírné znečištění),Liberec,Unknown
+val,50.7708,14.384,0.14949391782283783,Modrá (Mírné znečištění),Liberec,Unknown
+"výhled Jedlová, Sokol",50.8237,14.5028,0.12138499319553375,Modrá (Mírné znečištění),Liberec,Unknown
+výhled na Chřibskou,50.826,14.5011,0.12138499319553375,Modrá (Mírné znečištění),Liberec,Unknown
+Vyhlídka Svatopluka Čecha,50.5361,15.2435,0.15509212017059326,Modrá (Mírné znečištění),Liberec,Unknown
+výhled na Českosaské Švýcarsko,50.7809,14.4009,0.15283623337745667,Modrá (Mírné znečištění),Liberec,Unknown
+Šrámkova vyhlídka,50.4858,15.2588,0.14025284349918365,Modrá (Mírné znečištění),Liberec,Unknown
+Malý Bezděz,50.5399,14.7137,0.13779431581497192,Modrá (Mírné znečištění),Liberec,Unknown
+Prachovna,50.5442,15.1921,0.15782733261585236,Modrá (Mírné znečištění),Liberec,Unknown
+Vyhlídka na Bezděz,50.5255,14.6874,0.14103186130523682,Modrá (Mírné znečištění),Liberec,Unknown
+Nad Strží,50.7581,14.7084,0.1495310217142105,Modrá (Mírné znečištění),Liberec,Unknown
+Knesplova vyhlídka,50.805,14.648,0.13841348886489868,Modrá (Mírné znečištění),Liberec,Unknown
+Pěkný výhled,50.7836,15.329,0.14069770276546478,Modrá (Mírné znečištění),Liberec,Unknown
+Vyhlídka republiky,50.8169,14.5284,0.12811186909675598,Modrá (Mírné znečištění),Liberec,Unknown
+Johannisstein Aussicht,50.8345,14.7178,0.14139413833618164,Modrá (Mírné znečištění),Liberec,Unknown
+Krásná vyhlídka,50.6904,14.8848,0.15406295657157898,Modrá (Mírné znečištění),Liberec,Unknown
+Bezděz,50.5949,14.748,0.12349875271320343,Modrá (Mírné znečištění),Liberec,Unknown
+Břehyňský rybník a Máchovo jezero,50.5926,14.7518,0.125094935297966,Modrá (Mírné znečištění),Liberec,Unknown
+Vyhlídka Medvěd,50.7197,15.4487,0.12245185673236847,Modrá (Mírné znečištění),Liberec,Unknown
+Vyhlídka Ovce,50.7196,15.4475,0.12245185673236847,Modrá (Mírné znečištění),Liberec,Unknown
+Vyhlídka Horník,50.7193,15.4465,0.12245185673236847,Modrá (Mírné znečištění),Liberec,Unknown
+Drobošova vyhlídka,50.8062,14.6503,0.13781246542930603,Modrá (Mírné znečištění),Liberec,Unknown
+Vyhlídka Jaruš,50.907,15.2058,0.14403675496578217,Modrá (Mírné znečištění),Liberec,Unknown
+Vyhlídka Triangl,50.9115,15.1986,0.14790774881839752,Modrá (Mírné znečištění),Liberec,Unknown
+Skautská vyhlídka,50.4706,15.2894,0.14626269042491913,Modrá (Mírné znečištění),Liberec,Unknown
+Králův stolec,50.5667,14.6862,0.1413446068763733,Modrá (Mírné znečištění),Liberec,Unknown
+Rufusova vyhlídka,50.5666,14.6846,0.1413446068763733,Modrá (Mírné znečištění),Liberec,Unknown
+Vyhlídka Jaroslava Kuby,50.4933,15.2573,0.15265315771102905,Modrá (Mírné znečištění),Liberec,Unknown
+Pětikostelní kámen,50.8424,14.603,0.12382620573043823,Modrá (Mírné znečištění),Liberec,Unknown
+Jelení kámen,50.839,14.5866,0.12252099812030792,Modrá (Mírné znečištění),Liberec,Unknown
+Čertův stolek,49.714,15.7124,0.1191708892583847,Modrá (Mírné znečištění),Jihlava,Unknown
+Na Altánku,49.5552,15.0504,0.0776139497756958,Tmavě modrá (Slabé znečištění),Jihlava,Unknown
+Orlík,49.5652,15.4104,0.111910879611969,Modrá (Mírné znečištění),Jihlava,Unknown
+vyhlídka u Heřmanova (608m n.m.),49.3765,16.1853,0.10333202034235,Modrá (Mírné znečištění),Jihlava,Unknown
+Čertova vyhlídka,49.7859,15.0272,0.1263379156589508,Modrá (Mírné znečištění),Jihlava,Unknown
+Zatopený lom Trojka,49.6201,15.4106,0.11722571402788162,Modrá (Mírné znečištění),Jihlava,Unknown
+Zatopený lom Trojka,49.6203,15.4104,0.11722571402788162,Modrá (Mírné znečištění),Jihlava,Unknown
+Holý vrch,49.6223,15.3978,0.11066540330648422,Modrá (Mírné znečištění),Jihlava,Unknown
+U Tří Líp,49.1355,15.6731,0.0750809982419014,Tmavě modrá (Slabé znečištění),Jihlava,Unknown
+Mařenka,49.1707,15.703,0.07375724613666534,Tmavě modrá (Slabé znečištění),Jihlava,Unknown
+František,49.141,15.6484,0.07116271555423737,Tmavě modrá (Slabé znečištění),Jihlava,Unknown
+Vřesník - přehrada,49.5298,15.2425,0.10487852245569229,Modrá (Mírné znečištění),Jihlava,Unknown
+Vřesník - přehrada,49.5299,15.2428,0.10487852245569229,Modrá (Mírné znečištění),Jihlava,Unknown
+Stvořidla,49.6659,15.3354,0.10335016250610352,Modrá (Mírné znečištění),Jihlava,Unknown
+Hubertova Vyhlídka,49.1649,15.5608,0.06724444776773453,Tmavě modrá (Slabé znečištění),Jihlava,Unknown
+Sokolohrady,49.7148,15.7137,0.1191708892583847,Modrá (Mírné znečištění),Jihlava,Unknown
+"Tis, u kapličky",49.7128,15.4883,0.0876399353146553,Modrá (Mírné znečištění),Jihlava,Unknown
+Strom života - památník 100 let Republiky,49.5362,16.0126,0.12570181488990784,Modrá (Mírné znečištění),Jihlava,Unknown
+Ločarův kámen,49.5459,15.5409,0.12690326571464539,Modrá (Mírné znečištění),Jihlava,Unknown
+Pochopova skála,49.3507,16.2837,0.11748486012220383,Modrá (Mírné znečištění),Jihlava,Unknown
+Pochopova skála,49.3505,16.2835,0.11748486012220383,Modrá (Mírné znečištění),Jihlava,Unknown
+Sochorská skála,49.3641,16.2829,0.11101548373699188,Modrá (Mírné znečištění),Jihlava,Unknown
+Vřesník,49.5343,15.2497,0.10487852245569229,Modrá (Mírné znečištění),Jihlava,Unknown
+U Spáleného mostu,49.2759,15.7779,0.12106571346521378,Modrá (Mírné znečištění),Jihlava,Unknown
+vyhlídka Vejdoch,49.5361,16.0127,0.12570181488990784,Modrá (Mírné znečištění),Jihlava,Unknown
+Vyhlídka na Šmahlířce,49.3814,15.3565,0.08880487084388733,Modrá (Mírné znečištění),Jihlava,Unknown
+Amorova vyhlídka,49.3552,16.3492,0.1520197093486786,Modrá (Mírné znečištění),Jihlava,Unknown
+Babylon,49.3848,16.3598,0.13611213862895966,Modrá (Mírné znečištění),brno_45min,Unknown
+Vyhlídkové místo Kamínky,49.4813,16.512,0.14679008722305298,Modrá (Mírné znečištění),brno_45min,Unknown
+Amorova vyhlídka,49.3552,16.3492,0.1520197093486786,Modrá (Mírné znečištění),brno_45min,Unknown
+Vysoký kámen,50.3006,12.4081,0.09396862983703613,Modrá (Mírné znečištění),Karlovy Vary,Unknown
+Lohhauser,49.9344,12.5337,0.0627993568778038,Tmavě modrá (Slabé znečištění),Karlovy Vary,Unknown
+Vyhlídka Hartwiga Rupperta,50.1007,12.7896,0.1076182872056961,Modrá (Mírné znečištění),Karlovy Vary,Unknown
+Rogalová rampa,50.3616,13.1704,0.12993106245994568,Modrá (Mírné znečištění),Karlovy Vary,Unknown
+Olověný vrch,50.3675,12.5115,0.11310028284788132,Modrá (Mírné znečištění),Karlovy Vary,Unknown
+Chlumská hora,49.9997,13.2321,0.07801762223243713,Tmavě modrá (Slabé znečištění),Karlovy Vary,Unknown
+Chlumská hora,50.0055,13.2053,0.06161544471979141,Tmavě modrá (Slabé znečištění),Karlovy Vary,Unknown
+Hadí hora,50.3846,12.9347,0.11119364947080612,Modrá (Mírné znečištění),Karlovy Vary,Unknown
+Vyhlídka pod Liščím vrchem,50.2825,12.9998,0.15003702044487,Modrá (Mírné znečištění),Karlovy Vary,Unknown
+Vyhlídkový altán,49.9018,12.7808,0.10036378353834152,Modrá (Mírné znečištění),Karlovy Vary,Unknown
+Okno,50.4019,12.7498,0.09766019880771637,Modrá (Mírné znečištění),Karlovy Vary,Unknown
+Strašidlo,50.4013,12.7496,0.09766019880771637,Modrá (Mírné znečištění),Karlovy Vary,Unknown
+Borůvčí,50.401,12.7506,0.10126159340143204,Modrá (Mírné znečištění),Karlovy Vary,Unknown
+Pohled na lázně,50.3674,12.926,0.15948006510734558,Modrá (Mírné znečištění),Karlovy Vary,Unknown
+Duncanova vyhlídka,49.9967,12.6932,0.13699118793010712,Modrá (Mírné znečištění),Karlovy Vary,Unknown
+Radechovské skály,50.2781,13.2639,0.07886514812707901,Tmavě modrá (Slabé znečištění),Karlovy Vary,Unknown
+Hraběcí kříž,50.0399,13.2961,0.05812970921397209,Tmavě modrá (Slabé znečištění),Karlovy Vary,Unknown
+Otevřené dveře Nová Ves,50.3515,12.5454,0.10395178943872452,Modrá (Mírné znečištění),Karlovy Vary,Unknown
+Holubí skály,50.4417,12.8095,0.08559894561767578,Modrá (Mírné znečištění),Karlovy Vary,Unknown
+Mohyla Karla Klostermanna,50.3722,12.8282,0.11438143998384476,Modrá (Mírné znečištění),Karlovy Vary,Unknown
+Pohled z úbočí Malého Travného,49.5607,18.5436,0.12380828708410263,Modrá (Mírné znečištění),Ostrava,Unknown
+Zbojnická,49.4363,18.4647,0.08723567426204681,Modrá (Mírné znečištění),Ostrava,Unknown
+Skalní ostroh,49.8034,17.7747,0.14436154067516327,Modrá (Mírné znečištění),Ostrava,Unknown
+Švédská skála,49.7137,17.7544,0.14049790799617767,Modrá (Mírné znečištění),Ostrava,Unknown
+Vyhlídka u osady Jánské Koupele,49.8344,17.7116,0.11430827528238297,Modrá (Mírné znečištění),Ostrava,Unknown
+Lorelei,49.8195,17.7106,0.11617695540189743,Modrá (Mírné znečištění),Ostrava,Unknown
+Výhled na Beskydy,49.6306,17.7128,0.1482616811990738,Modrá (Mírné znečištění),Ostrava,Unknown
+Vyhlídka U jelena,49.6215,17.6207,0.1308652013540268,Modrá (Mírné znečištění),Ostrava,Unknown
+Orlí skála,49.7232,17.7316,0.12130528688430786,Modrá (Mírné znečištění),Ostrava,Unknown
+Ptačí kámen,50.8589,14.3339,0.11081896722316742,Modrá (Mírné znečištění),Ústí nad Labem,Unknown
+Kamenická vyhlídka,50.8503,14.3444,0.11292338371276855,Modrá (Mírné znečištění),Ústí nad Labem,Unknown
+Válečná díra,50.8213,14.357,0.13093797862529755,Modrá (Mírné znečištění),Ústí nad Labem,Unknown
+Ronov,50.6204,14.4147,0.1470107138156891,Modrá (Mírné znečištění),Ústí nad Labem,Unknown
+Puklá skála,50.6946,13.5857,0.13223138451576233,Modrá (Mírné znečištění),Ústí nad Labem,Unknown
+Víťova vyhlídka,50.6494,14.2768,0.14121168851852417,Modrá (Mírné znečištění),Ústí nad Labem,Unknown
+Vyhlídka,50.609,14.2795,0.1335000991821289,Modrá (Mírné znečištění),Ústí nad Labem,Unknown
+výhled na Českosaské Švýcarsko,50.7644,14.3755,0.1486661732196808,Modrá (Mírné znečištění),Ústí nad Labem,Unknown
+vyhlídka,50.7553,14.3712,0.1479552686214447,Modrá (Mírné znečištění),Ústí nad Labem,Unknown
+vyhlídka,50.7482,14.366,0.1509707272052765,Modrá (Mírné znečištění),Ústí nad Labem,Unknown
+vyhlídka Liščí Hory,50.7323,14.357,0.1594589203596115,Modrá (Mírné znečištění),Ústí nad Labem,Unknown
+výhled na Sedlo,50.6897,14.2833,0.15111371874809265,Modrá (Mírné znečištění),Ústí nad Labem,Unknown
+vyhlídka nad soutěskou,50.8003,14.3626,0.15305766463279724,Modrá (Mírné znečištění),Ústí nad Labem,Unknown
+výhled na Lužické hory,50.7637,14.3774,0.1486661732196808,Modrá (Mírné znečištění),Ústí nad Labem,Unknown
+val,50.7708,14.384,0.14949391782283783,Modrá (Mírné znečištění),Ústí nad Labem,Unknown
+Belvedér,50.8495,14.2214,0.1486290693283081,Modrá (Mírné znečištění),Ústí nad Labem,Unknown
+výhled na Lužické hory a Markvartickou kotlinu,50.7959,14.379,0.1545463502407074,Modrá (Mírné znečištění),Ústí nad Labem,Unknown
+"výhled Jedlová, Sokol",50.8237,14.5028,0.12138499319553375,Modrá (Mírné znečištění),Ústí nad Labem,Unknown
+výhled na Chřibskou,50.826,14.5011,0.12138499319553375,Modrá (Mírné znečištění),Ústí nad Labem,Unknown
+Krásná vyhlídka,50.356,13.9712,0.15309394896030426,Modrá (Mírné znečištění),Ústí nad Labem,Unknown
+výhled na Českosaské Švýcarsko,50.7809,14.4009,0.15283623337745667,Modrá (Mírné znečištění),Ústí nad Labem,Unknown
+výhled na Růžovský vrch,50.7964,14.3763,0.1545463502407074,Modrá (Mírné znečištění),Ústí nad Labem,Unknown
+Mravenečník,50.7003,13.5646,0.12093789875507355,Modrá (Mírné znečištění),Ústí nad Labem,Unknown
+Máchova vyhlídka,50.6124,14.5074,0.1541973352432251,Modrá (Mírné znečištění),Ústí nad Labem,Unknown
+Papinova vyhlídka,50.6287,14.4029,0.1513032615184784,Modrá (Mírné znečištění),Ústí nad Labem,Unknown
+Vyhlídka republiky,50.8169,14.5284,0.12811186909675598,Modrá (Mírné znečištění),Ústí nad Labem,Unknown
+výhled na Helfenburk,50.5819,14.3784,0.1278972029685974,Modrá (Mírné znečištění),Ústí nad Labem,Unknown
+výhled na Opičí skálu,50.5896,14.378,0.12909924983978271,Modrá (Mírné znečištění),Ústí nad Labem,Unknown
+Pod Budinou,50.5799,14.3566,0.13927772641181946,Modrá (Mírné znečištění),Ústí nad Labem,Unknown
+Treppenstein,50.8598,14.3936,0.10520810633897781,Modrá (Mírné znečištění),Ústí nad Labem,Unknown
+výhled na Helfenburk,50.5815,14.3819,0.1278972029685974,Modrá (Mírné znečištění),Ústí nad Labem,Unknown
+Vyhlídka Fénix,50.8742,14.2861,0.11636823415756226,Modrá (Mírné znečištění),Ústí nad Labem,Unknown
+Vrše,49.1209,17.2624,0.12857793271541595,Modrá (Mírné znečištění),Zlín,Unknown
+kamen s vyhlidkou,49.139,17.2526,0.12685313820838928,Modrá (Mírné znečištění),Zlín,Unknown
+Kamenný stůl,49.2223,17.2526,0.15473678708076477,Modrá (Mírné znečištění),Zlín,Unknown
+Výhled na chatu Bunč,49.1816,17.3481,0.1387026011943817,Modrá (Mírné znečištění),Zlín,Unknown
+Výhled na Beskydy,49.6306,17.7128,0.1482616811990738,Modrá (Mírné znečištění),Zlín,Unknown
+Cimburk,49.1036,17.2156,0.1289585679769516,Modrá (Mírné znečištění),Zlín,Unknown
+Koryčanská kaple,49.0817,17.1991,0.140602707862854,Modrá (Mírné znečištění),Zlín,Unknown
+Vyhlídkové místo Nad vlekem,49.1664,17.8357,0.14153867959976196,Modrá (Mírné znečištění),Zlín,Unknown
+Vyhlídka U jelena,49.6215,17.6207,0.1308652013540268,Modrá (Mírné znečištění),Zlín,Unknown
+Vyhlídka u hrušky,49.2334,17.9152,0.11643444746732712,Modrá (Mírné znečištění),Zlín,Unknown
+Pozorovatelna Durch,49.1467,18.0791,0.10370001941919327,Modrá (Mírné znečištění),Zlín,Unknown
+Výhled na Beskydy,49.6306,17.7128,0.1482616811990738,Modrá (Mírné znečištění),koprivnice_45min,Unknown
+Babylon,49.3848,16.3598,0.13611213862895966,Modrá (Mírné znečištění),Brno,Unknown
+Vyhlídka Nad Soutěskou,48.8648,16.6432,0.1526152491569519,Modrá (Mírné znečištění),Brno,Unknown
+Malá skála,49.1364,16.2467,0.15204501152038574,Modrá (Mírné znečištění),Brno,Unknown
+Wilsonova vyhlídka,49.1615,16.0898,0.1350226253271103,Modrá (Mírné znečištění),Brno,Unknown
+vyhlídka u Heřmanova (608m n.m.),49.3765,16.1853,0.10333202034235,Modrá (Mírné znečištění),Brno,Unknown
+Na babách,49.0994,16.2237,0.1567055881023407,Modrá (Mírné znečištění),Brno,Unknown
+Velký kačer,49.1016,16.2459,0.1455267071723938,Modrá (Mírné znečištění),Brno,Unknown
+Velká skála,49.1024,16.2407,0.14912591874599457,Modrá (Mírné znečištění),Brno,Unknown
+Helišova skála,49.4125,16.7587,0.15979613363742828,Modrá (Mírné znečištění),Brno,Unknown
+Pavlov,48.872,16.6556,0.1556442379951477,Modrá (Mírné znečištění),Brno,Unknown
+Zatopený mlýn,49.133,16.1006,0.14423899352550507,Modrá (Mírné znečištění),Brno,Unknown
+Magdalenina skála,49.1403,16.2362,0.14758095145225525,Modrá (Mírné znečištění),Brno,Unknown
+Krahulcova vyhlídka,49.463,16.7202,0.15683422982692719,Modrá (Mírné znečištění),Brno,Unknown
+Kamenný stůl,49.2223,17.2526,0.15473678708076477,Modrá (Mírné znečištění),Brno,Unknown
+Velká Baba,49.0993,16.2253,0.15235775709152222,Modrá (Mírné znečištění),Brno,Unknown
+Skalní vyhlídka,49.4484,16.3205,0.11336350440979004,Modrá (Mírné znečištění),Brno,Unknown
+Výhled na vilu Mittrovských,49.4519,16.323,0.11336350440979004,Modrá (Mírné znečištění),Brno,Unknown
+Výří skála,49.45,16.3021,0.10273100435733795,Modrá (Mírné znečištění),Brno,Unknown
+Pochopova skála,49.3507,16.2837,0.11748486012220383,Modrá (Mírné znečištění),Brno,Unknown
+Pochopova skála,49.3505,16.2835,0.11748486012220383,Modrá (Mírné znečištění),Brno,Unknown
+Sochorská skála,49.3641,16.2829,0.11101548373699188,Modrá (Mírné znečištění),Brno,Unknown
+Vyhlídkové místo Kamínky,49.4813,16.512,0.14679008722305298,Modrá (Mírné znečištění),Brno,Unknown
+Halířova skála,49.1862,16.0159,0.11701878905296326,Modrá (Mírné znečištění),Brno,Unknown
+Dvořákova vyhlídka,49.1718,16.0462,0.12007855623960495,Modrá (Mírné znečištění),Brno,Unknown
+Amorova vyhlídka,49.3552,16.3492,0.1520197093486786,Modrá (Mírné znečištění),Brno,Unknown
+Malý Rabštýn,49.7229,17.4518,0.12711267173290253,Modrá (Mírné znečištění),Olomouc,Unknown
+Křížový vrch,49.8629,17.1784,0.09991060197353363,Modrá (Mírné znečištění),Olomouc,Unknown
+U Tety,49.7478,16.5794,0.12502598762512207,Modrá (Mírné znečištění),Olomouc,Unknown
+Baba - 639,49.7321,17.4247,0.13014797866344452,Modrá (Mírné znečištění),Olomouc,Unknown
+Bašta,49.513,16.885,0.13237999379634857,Modrá (Mírné znečištění),Olomouc,Unknown
+Arboretum Makču Pikču,49.8173,17.2225,0.14432360231876373,Modrá (Mírné znečištění),Olomouc,Unknown
+Bradlo,49.8541,17.0543,0.13405360281467438,Modrá (Mírné znečištění),Olomouc,Unknown
+Výhled na Janoslavice,49.8485,16.9822,0.15243114531040192,Modrá (Mírné znečištění),Olomouc,Unknown
+Vyhlídkové místo u Honzíkova kříže,49.4608,16.8779,0.12708820402622223,Modrá (Mírné znečištění),Olomouc,Unknown
+Švédská skála,49.7137,17.7544,0.14049790799617767,Modrá (Mírné znečištění),Olomouc,Unknown
+Nad Doly,49.7664,16.5834,0.11815927177667618,Modrá (Mírné znečištění),Olomouc,Unknown
+Helišova skála,49.4125,16.7587,0.15979613363742828,Modrá (Mírné znečištění),Olomouc,Unknown
+Strážisko,49.637,17.4784,0.15933722257614136,Modrá (Mírné znečištění),Olomouc,Unknown
+Chochola,49.5379,16.8686,0.14834055304527283,Modrá (Mírné znečištění),Olomouc,Unknown
+Krahulcova vyhlídka,49.463,16.7202,0.15683422982692719,Modrá (Mírné znečištění),Olomouc,Unknown
+Kamenný stůl,49.2223,17.2526,0.15473678708076477,Modrá (Mírné znečištění),Olomouc,Unknown
+Kočičí vrch,49.8017,17.431,0.13800883293151855,Modrá (Mírné znečištění),Olomouc,Unknown
+Výhled na Beskydy,49.6306,17.7128,0.1482616811990738,Modrá (Mírné znečištění),Olomouc,Unknown
+swing_gate,49.6939,17.4813,0.13407257199287415,Modrá (Mírné znečištění),Olomouc,Unknown
+Vyhlídka U jelena,49.6215,17.6207,0.1308652013540268,Modrá (Mírné znečištění),Olomouc,Unknown
+Orlí skála,49.7232,17.7316,0.12130528688430786,Modrá (Mírné znečištění),Olomouc,Unknown
+Velké Hradisko,49.8019,16.1705,0.09427444636821747,Modrá (Mírné znečištění),Hradec Králové,Unknown
+vyhlídka Míru,50.4666,15.2912,0.14626269042491913,Modrá (Mírné znečištění),Hradec Králové,Unknown
+Hlaholská vyhlídka,50.467,15.2957,0.15158526599407196,Modrá (Mírné znečištění),Hradec Králové,Unknown
+Vyhlídka pražského pěveckého sboru Křížkovský,50.4664,15.2992,0.15158526599407196,Modrá (Mírné znečištění),Hradec Králové,Unknown
+Vyhlídka na hrad Potštejn,50.0754,16.3014,0.13201750814914703,Modrá (Mírné znečištění),Hradec Králové,Unknown
+Barunčina vyhlídka,50.4477,15.9981,0.14344143867492676,Modrá (Mírné znečištění),Hradec Králové,Unknown
+Zámeček,49.8027,16.1685,0.09427444636821747,Modrá (Mírné znečištění),Hradec Králové,Unknown
+U transformátoru,50.4679,16.0223,0.1480594277381897,Modrá (Mírné znečištění),Hradec Králové,Unknown
+Hromobitka,50.4535,16.0213,0.14651386439800262,Modrá (Mírné znečištění),Hradec Králové,Unknown
+Mečov,50.4644,16.017,0.1480594277381897,Modrá (Mírné znečištění),Hradec Králové,Unknown
+Krkonošská vyhlídka,50.4665,15.6055,0.11839862167835236,Modrá (Mírné znečištění),Hradec Králové,Unknown
+Byšičky,50.4192,15.6101,0.1440424770116806,Modrá (Mírné znečištění),Hradec Králové,Unknown
+U třešně,50.4469,16.0376,0.15601220726966858,Modrá (Mírné znečištění),Hradec Králové,Unknown
+Karolínina vyhlídka,50.4967,15.7678,0.11837416142225266,Modrá (Mírné znečištění),Hradec Králové,Unknown
+Výhled z Faltova kopce,50.4567,16.0401,0.15941551327705383,Modrá (Mírné znečištění),Hradec Králové,Unknown
+U Spáleného mostu,50.0868,16.3125,0.14279069006443024,Modrá (Mírné znečištění),Hradec Králové,Unknown
+Vinice vyhlídka,50.0466,16.0553,0.15536226332187653,Modrá (Mírné znečištění),Hradec Králové,Unknown
+Vyhlídka na Kaňon,49.8389,15.9712,0.13364194333553314,Modrá (Mírné znečištění),Hradec Králové,Unknown
+Malé Hradisko,49.8026,16.1702,0.09427444636821747,Modrá (Mírné znečištění),Hradec Králové,Unknown
+Hráz rybníku Dolní Peklo,49.867,15.6093,0.13803955912590027,Modrá (Mírné znečištění),Hradec Králové,Unknown
+Kazabrud,50.4965,15.6095,0.11425133794546127,Modrá (Mírné znečištění),Hradec Králové,Unknown
+Zvičina,50.4549,15.6942,0.11508540064096451,Modrá (Mírné znečištění),Hradec Králové,Unknown
+Alžbětina vyhlídka,50.4537,15.7072,0.11700064688920975,Modrá (Mírné znečištění),Hradec Králové,Unknown
+Vojtěchův kopec,49.7281,15.9773,0.08970049768686295,Modrá (Mírné znečištění),Pardubice,Unknown
+Velké Hradisko,49.8019,16.1705,0.09427444636821747,Modrá (Mírné znečištění),Pardubice,Unknown
+Čertův stolek,49.714,15.7124,0.1191708892583847,Modrá (Mírné znečištění),Pardubice,Unknown
+Barunčina vyhlídka,50.4477,15.9981,0.14344143867492676,Modrá (Mírné znečištění),Pardubice,Unknown
+Zámeček,49.8027,16.1685,0.09427444636821747,Modrá (Mírné znečištění),Pardubice,Unknown
+U transformátoru,50.4679,16.0223,0.1480594277381897,Modrá (Mírné znečištění),Pardubice,Unknown
+Hromobitka,50.4535,16.0213,0.14651386439800262,Modrá (Mírné znečištění),Pardubice,Unknown
+Mečov,50.4644,16.017,0.1480594277381897,Modrá (Mírné znečištění),Pardubice,Unknown
+Tisá skála,49.8452,15.419,0.11576149612665176,Modrá (Mírné znečištění),Pardubice,Unknown
+Byšičky,50.4192,15.6101,0.1440424770116806,Modrá (Mírné znečištění),Pardubice,Unknown
+U třešně,50.4469,16.0376,0.15601220726966858,Modrá (Mírné znečištění),Pardubice,Unknown
+Výhled z Faltova kopce,50.4567,16.0401,0.15941551327705383,Modrá (Mírné znečištění),Pardubice,Unknown
+U Spáleného mostu,50.0868,16.3125,0.14279069006443024,Modrá (Mírné znečištění),Pardubice,Unknown
+Vinice vyhlídka,50.0466,16.0553,0.15536226332187653,Modrá (Mírné znečištění),Pardubice,Unknown
+Vyhlídka na Kaňon,49.8389,15.9712,0.13364194333553314,Modrá (Mírné znečištění),Pardubice,Unknown
+Malé Hradisko,49.8026,16.1702,0.09427444636821747,Modrá (Mírné znečištění),Pardubice,Unknown
+Sokolohrady,49.7148,15.7137,0.1191708892583847,Modrá (Mírné znečištění),Pardubice,Unknown
+Hráz rybníku Dolní Peklo,49.867,15.6093,0.13803955912590027,Modrá (Mírné znečištění),Pardubice,Unknown
+Louštín,50.1639,13.7937,0.14099226891994476,Modrá (Mírné znečištění),Praha,Unknown
+Čertova vyhlídka,49.7859,15.0272,0.1263379156589508,Modrá (Mírné znečištění),Praha,Unknown
+Světovina,49.8683,13.7423,0.13862383365631104,Modrá (Mírné znečištění),Praha,Unknown
+Masarykova vyhlídka,50.0352,13.923,0.15829338133335114,Modrá (Mírné znečištění),Praha,Unknown
+Výhled na Vlašim,49.725,14.8453,0.12403394281864166,Modrá (Mírné znečištění),Praha,Unknown
+Pohled z úbočí Malého Travného,49.5607,18.5436,0.12380828708410263,Modrá (Mírné znečištění),koprivnice_60min,Unknown
+Zbojnická,49.4363,18.4647,0.08723567426204681,Modrá (Mírné znečištění),koprivnice_60min,Unknown
+Skalní ostroh,49.8034,17.7747,0.14436154067516327,Modrá (Mírné znečištění),koprivnice_60min,Unknown
+Švédská skála,49.7137,17.7544,0.14049790799617767,Modrá (Mírné znečištění),koprivnice_60min,Unknown
+Vyhlídka na zvonici,49.492,18.2227,0.15610027313232422,Modrá (Mírné znečištění),koprivnice_60min,Unknown
+Vyhlídka od hotelu Radegast,49.4891,18.2252,0.1521512120962143,Modrá (Mírné znečištění),koprivnice_60min,Unknown
+Výhled na Beskydy,49.6306,17.7128,0.1482616811990738,Modrá (Mírné znečištění),koprivnice_60min,Unknown
+Vyhlídka U jelena,49.6215,17.6207,0.1308652013540268,Modrá (Mírné znečištění),koprivnice_60min,Unknown
+Orlí skála,49.7232,17.7316,0.12130528688430786,Modrá (Mírné znečištění),koprivnice_60min,Unknown
+Cyrilka,49.4849,18.2612,0.1313445121049881,Modrá (Mírné znečištění),koprivnice_60min,Unknown
+Vyhlídka Havlova skála,49.9098,13.5526,0.10514713823795319,Modrá (Mírné znečištění),Plzeň,Unknown
+Na Plazu,49.9385,13.6558,0.08215794712305069,Modrá (Mírné znečištění),Plzeň,Unknown
+Jindřichova skála,49.768,13.8818,0.10527028143405914,Modrá (Mírné znečištění),Plzeň,Unknown
+Hradiště,49.8113,13.6178,0.14851918816566467,Modrá (Mírné znečištění),Plzeň,Unknown
+Krašov,49.9489,13.5887,0.08416201174259186,Modrá (Mírné znečištění),Plzeň,Unknown
+Bílá skála,49.8216,13.6506,0.11881636083126068,Modrá (Mírné znečištění),Plzeň,Unknown
+Nad Marastkem,49.5928,13.7284,0.06587176024913788,Tmavě modrá (Slabé znečištění),Plzeň,Unknown
+Výhled na Měšno,49.6514,13.6284,0.12177745252847672,Modrá (Mírné znečištění),Plzeň,Unknown
+pozorovatelna Pohraniční stráže,49.6735,12.5446,0.11403624713420868,Modrá (Mírné znečištění),Plzeň,Unknown
+Příkosická vyhlídka,49.6647,13.6442,0.12881706655025482,Modrá (Mírné znečištění),Plzeň,Unknown
+Vyhlídka na Šumavu,49.4353,13.6594,0.07145732641220093,Tmavě modrá (Slabé znečištění),Plzeň,Unknown
+Vyhlídka na Žďár,49.7291,13.6891,0.15793758630752563,Modrá (Mírné znečištění),Plzeň,Unknown
+Skalní vyhlídka z Vlče na Strašice,49.7227,13.7266,0.11647933721542358,Modrá (Mírné znečištění),Plzeň,Unknown
+Chlumská hora,49.9997,13.2321,0.07801762223243713,Tmavě modrá (Slabé znečištění),Plzeň,Unknown
+Vyhlídka Na Plazích,49.9674,13.706,0.07369590550661087,Tmavě modrá (Slabé znečištění),Plzeň,Unknown
+Chlumská hora,50.0055,13.2053,0.06161544471979141,Tmavě modrá (Slabé znečištění),Plzeň,Unknown
+Černá skála,49.8162,13.6376,0.13112331926822662,Modrá (Mírné znečištění),Plzeň,Unknown
+Vyhlídkový altán,49.9018,12.7808,0.10036378353834152,Modrá (Mírné znečištění),Plzeň,Unknown
+Světovina,49.8683,13.7423,0.13862383365631104,Modrá (Mírné znečištění),Plzeň,Unknown
+Goethova vyhlídka,49.8124,12.8523,0.07850325852632523,Tmavě modrá (Slabé znečištění),Plzeň,Unknown
+Velký kámen,49.7282,13.7368,0.11478675901889801,Modrá (Mírné znečištění),Plzeň,Unknown
+Výhled na Liblín,49.9196,13.5569,0.10539831221103668,Modrá (Mírné znečištění),Plzeň,Unknown
+Těnovická vyhlídka,49.6247,13.6344,0.11026113480329514,Modrá (Mírné znečištění),Plzeň,Unknown
+Vyhlídka Dominiky Kolowrat Krakovské,49.6298,12.6,0.06278671324253082,Tmavě modrá (Slabé znečištění),Plzeň,Unknown
+Hraběcí kříž,50.0399,13.2961,0.05812970921397209,Tmavě modrá (Slabé znečištění),Plzeň,Unknown
+Karvánka,49.9141,13.529,0.11120280623435974,Modrá (Mírné znečištění),Plzeň,Unknown
+skalní vyhlídka Pavučina,49.9309,13.5573,0.10647722333669662,Modrá (Mírné znečištění),Plzeň,Unknown
+Vyhlídka pod Bukovou horou,49.5288,13.5499,0.09824881702661514,Modrá (Mírné znečištění),Plzeň,Unknown
+Výhled na Kamenec,49.8825,13.5974,0.11216229200363159,Modrá (Mírné znečištění),Plzeň,Unknown
+Všekarská vyhlídka,49.6079,13.0447,0.1111559346318245,Modrá (Mírné znečištění),Plzeň,Unknown
+Vyhlídka Pohoří,49.3503,13.1488,0.09591155499219894,Modrá (Mírné znečištění),Plzeň,Unknown
+Oskarova vyhlídka,49.9689,13.7812,0.0844428688287735,Modrá (Mírné znečištění),Plzeň,Unknown
+Na Floriánu,49.8496,13.6076,0.1528353989124298,Modrá (Mírné znečištění),Plzeň,Unknown
+Vyhlídka Antonína Bárty,49.5255,13.6653,0.07931285351514816,Tmavě modrá (Slabé znečištění),Plzeň,Unknown
+Babylon,49.3848,16.3598,0.13611213862895966,Modrá (Mírné znečištění),brno_60min,Unknown
+Vyhlídka Nad Soutěskou,48.8648,16.6432,0.1526152491569519,Modrá (Mírné znečištění),brno_60min,Unknown
+Malá skála,49.1364,16.2467,0.15204501152038574,Modrá (Mírné znečištění),brno_60min,Unknown
+Wilsonova vyhlídka,49.1615,16.0898,0.1350226253271103,Modrá (Mírné znečištění),brno_60min,Unknown
+vyhlídka u Heřmanova (608m n.m.),49.3765,16.1853,0.10333202034235,Modrá (Mírné znečištění),brno_60min,Unknown
+Na babách,49.0994,16.2237,0.1567055881023407,Modrá (Mírné znečištění),brno_60min,Unknown
+Velký kačer,49.1016,16.2459,0.1455267071723938,Modrá (Mírné znečištění),brno_60min,Unknown
+Velká skála,49.1024,16.2407,0.14912591874599457,Modrá (Mírné znečištění),brno_60min,Unknown
+Helišova skála,49.4125,16.7587,0.15979613363742828,Modrá (Mírné znečištění),brno_60min,Unknown
+Pavlov,48.872,16.6556,0.1556442379951477,Modrá (Mírné znečištění),brno_60min,Unknown
+Zatopený mlýn,49.133,16.1006,0.14423899352550507,Modrá (Mírné znečištění),brno_60min,Unknown
+Magdalenina skála,49.1403,16.2362,0.14758095145225525,Modrá (Mírné znečištění),brno_60min,Unknown
+Krahulcova vyhlídka,49.463,16.7202,0.15683422982692719,Modrá (Mírné znečištění),brno_60min,Unknown
+Kamenný stůl,49.2223,17.2526,0.15473678708076477,Modrá (Mírné znečištění),brno_60min,Unknown
+Velká Baba,49.0993,16.2253,0.15235775709152222,Modrá (Mírné znečištění),brno_60min,Unknown
+Skalní vyhlídka,49.4484,16.3205,0.11336350440979004,Modrá (Mírné znečištění),brno_60min,Unknown
+Výhled na vilu Mittrovských,49.4519,16.323,0.11336350440979004,Modrá (Mírné znečištění),brno_60min,Unknown
+Výří skála,49.45,16.3021,0.10273100435733795,Modrá (Mírné znečištění),brno_60min,Unknown
+Pochopova skála,49.3507,16.2837,0.11748486012220383,Modrá (Mírné znečištění),brno_60min,Unknown
+Pochopova skála,49.3505,16.2835,0.11748486012220383,Modrá (Mírné znečištění),brno_60min,Unknown
+Sochorská skála,49.3641,16.2829,0.11101548373699188,Modrá (Mírné znečištění),brno_60min,Unknown
+Vyhlídkové místo Kamínky,49.4813,16.512,0.14679008722305298,Modrá (Mírné znečištění),brno_60min,Unknown
+Dvořákova vyhlídka,49.1718,16.0462,0.12007855623960495,Modrá (Mírné znečištění),brno_60min,Unknown
+Amorova vyhlídka,49.3552,16.3492,0.1520197093486786,Modrá (Mírné znečištění),brno_60min,Unknown
+Sněžník,49.276,14.8952,0.0806737169623375,Modrá (Mírné znečištění),České Budějovice,Unknown
+Vožický výhled,49.5323,14.8145,0.13567353785037994,Modrá (Mírné znečištění),České Budějovice,Unknown
+Lipno Panorama,48.7164,14.0793,0.050792496651411057,Tmavě modrá (Slabé znečištění),České Budějovice,Unknown
+Helfenburk,49.1362,14.0067,0.07257965952157974,Tmavě modrá (Slabé znečištění),České Budějovice,Unknown
+Jelení skok,49.1032,14.4656,0.1469142735004425,Modrá (Mírné znečištění),České Budějovice,Unknown
+Vyhlídka Oldřicha Fencla,48.8436,14.5572,0.12161780148744583,Modrá (Mírné znečištění),České Budějovice,Unknown
+Hasičská vyhlídka,49.1715,14.2583,0.12158701568841934,Modrá (Mírné znečištění),České Budějovice,Unknown
+Kraví pole,49.0118,14.0931,0.06823241710662842,Tmavě modrá (Slabé znečištění),České Budějovice,Unknown
+Šumavská vyhlídka,49.1678,14.0913,0.09036731719970703,Modrá (Mírné znečištění),České Budějovice,Unknown
+vyhlídková terasa,49.2257,14.1275,0.10387148708105087,Modrá (Mírné znečištění),České Budějovice,Unknown
+Nad Vaněčkem,48.6568,14.5991,0.04661041870713234,Tmavě modrá (Slabé znečištění),České Budějovice,Unknown
+U Ludvických Hor,48.6598,14.6008,0.04466667026281357,Tmavě modrá (Slabé znečištění),České Budějovice,Unknown
+Malonty U Jákla,48.6822,14.588,0.07335680723190308,Tmavě modrá (Slabé znečištění),České Budějovice,Unknown
+Kraví hora,48.634,14.3203,0.07722127437591553,Tmavě modrá (Slabé znečištění),České Budějovice,Unknown
+Vyhlídka u altánku,49.5431,14.6063,0.08151115477085114,Modrá (Mírné znečištění),České Budějovice,Unknown
+Vyhlídka pana Šalamouna,48.6538,14.3655,0.07203938066959381,Tmavě modrá (Slabé znečištění),České Budějovice,Unknown
+Kuhberg -  Kraví Hora,48.634,14.3203,0.07722127437591553,Tmavě modrá (Slabé znečištění),České Budějovice,Unknown
+Ve smrčí,49.1663,14.5544,0.12275195866823196,Modrá (Mírné znečištění),České Budějovice,Unknown
+Matějčkova vyhlídka,48.7403,14.422,0.08877468854188919,Modrá (Mírné znečištění),České Budějovice,Unknown
+svatý Jan Nepomucký,49.7467,14.3641,0.11481145769357681,Modrá (Mírné znečištění),Příbram,Unknown
+Nad podkovou,49.6273,14.2022,0.08618040382862091,Modrá (Mírné znečištění),Příbram,Unknown
+Pozorovatelny,49.7626,13.9235,0.11068519949913025,Modrá (Mírné znečištění),Příbram,Unknown
+Pozorovatelny,49.7637,13.9265,0.1142907440662384,Modrá (Mírné znečištění),Příbram,Unknown
+Jindřichova skála,49.768,13.8818,0.10527028143405914,Modrá (Mírné znečištění),Příbram,Unknown
+Dopadová plocha,49.7256,13.8675,0.08769601583480835,Modrá (Mírné znečištění),Příbram,Unknown
+Hradiště,49.8113,13.6178,0.14851918816566467,Modrá (Mírné znečištění),Příbram,Unknown
+Bílá skála,49.8216,13.6506,0.11881636083126068,Modrá (Mírné znečištění),Příbram,Unknown
+Albertovy skály,49.7254,14.3681,0.10729945451021194,Modrá (Mírné znečištění),Příbram,Unknown
+Bartůňkova vyhlídka,49.7213,14.3672,0.10729945451021194,Modrá (Mírné znečištění),Příbram,Unknown
+Vyhlídka Opata Zaorala,49.7398,14.4044,0.10691332817077637,Modrá (Mírné znečištění),Příbram,Unknown
+Vyhlídka U Rybárny,49.3866,14.1683,0.09155821800231934,Modrá (Mírné znečištění),Příbram,Unknown
+Vyhlídka Srdce,49.6656,14.2476,0.09554378688335419,Modrá (Mírné znečištění),Příbram,Unknown
+Nad Marastkem,49.5928,13.7284,0.06587176024913788,Tmavě modrá (Slabé znečištění),Příbram,Unknown
+Výhled na Měšno,49.6514,13.6284,0.12177745252847672,Modrá (Mírné znečištění),Příbram,Unknown
+Krkavčí skála,49.41,14.1639,0.07215642184019089,Tmavě modrá (Slabé znečištění),Příbram,Unknown
+Příkosická vyhlídka,49.6647,13.6442,0.12881706655025482,Modrá (Mírné znečištění),Příbram,Unknown
+Vyhlídka na Žďár,49.7291,13.6891,0.15793758630752563,Modrá (Mírné znečištění),Příbram,Unknown
+Skalní vyhlídka z Vlče na Strašice,49.7227,13.7266,0.11647933721542358,Modrá (Mírné znečištění),Příbram,Unknown
+Hasičská vyhlídka,49.1715,14.2583,0.12158701568841934,Modrá (Mírné znečištění),Příbram,Unknown
+Vyhlídka u Sedlčan,49.634,14.4654,0.10504273325204849,Modrá (Mírné znečištění),Příbram,Unknown
+Malý Tok - Vyhlídka,49.6536,13.8459,0.08543869107961655,Modrá (Mírné znečištění),Příbram,Unknown
+Čákova vyhlídka,49.6552,13.8175,0.07690808922052383,Tmavě modrá (Slabé znečištění),Příbram,Unknown
+Černá skála,49.8162,13.6376,0.13112331926822662,Modrá (Mírné znečištění),Příbram,Unknown
+9-StoneStand,49.4488,13.8403,0.1009213775396347,Modrá (Mírné znečištění),Příbram,Unknown
+Vyhlídka Homolka,49.7998,14.4366,0.1580919772386551,Modrá (Mírné znečištění),Příbram,Unknown
+Světovina,49.8683,13.7423,0.13862383365631104,Modrá (Mírné znečištění),Příbram,Unknown
+Velký kámen,49.7282,13.7368,0.11478675901889801,Modrá (Mírné znečištění),Příbram,Unknown
+Šumavská vyhlídka,49.1678,14.0913,0.09036731719970703,Modrá (Mírné znečištění),Příbram,Unknown
+Třitrubecká vyhlídka,49.7038,13.7845,0.08033733814954758,Modrá (Mírné znečištění),Příbram,Unknown
+Voltušská vyhlídka,49.5841,13.8396,0.07990755140781403,Tmavě modrá (Slabé znečištění),Příbram,Unknown
+Těnovická vyhlídka,49.6247,13.6344,0.11026113480329514,Modrá (Mírné znečištění),Příbram,Unknown
+Svatý jezevčík,49.7317,13.8686,0.08922191709280014,Modrá (Mírné znečištění),Příbram,Unknown
+Chlukov,49.7148,13.7862,0.08763444423675537,Modrá (Mírné znečištění),Příbram,Unknown
+vyhlídková terasa,49.2257,14.1275,0.10387148708105087,Modrá (Mírné znečištění),Příbram,Unknown
+jihovýchodní výhled,49.5723,14.0278,0.08734533935785294,Modrá (Mírné znečištění),Příbram,Unknown
+severozápadní výhled,49.5739,14.0265,0.08734533935785294,Modrá (Mírné znečištění),Příbram,Unknown
+Na Vlčí skále,49.438,14.1984,0.05956120789051056,Tmavě modrá (Slabé znečištění),Příbram,Unknown
+Na Floriánu,49.8496,13.6076,0.1528353989124298,Modrá (Mírné znečištění),Příbram,Unknown
+Bílá skála,49.5773,13.8434,0.07710528373718262,Tmavě modrá (Slabé znečištění),Příbram,Unknown
+U Drtiče,49.5747,13.8441,0.07710528373718262,Tmavě modrá (Slabé znečištění),Příbram,Unknown
+Vyhlídka Antonína Bárty,49.5255,13.6653,0.07931285351514816,Tmavě modrá (Slabé znečištění),Příbram,Unknown

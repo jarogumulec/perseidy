@@ -16,9 +16,23 @@ ISOCHRONES_DIR = Path(__file__).parent / "isochrones"
 
 FALCHI_PNG = OUTPUT_DIR / "falchi_overlay.png"
 FALCHI_BOUNDS_JSON = OUTPUT_DIR / "falchi_bounds.json"
-VIEWPOINTS_CSV = OUTPUT_DIR / "viewpoints_with_darkness.csv"
-BEST_SITES_CSV = OUTPUT_DIR / "best_sites_per_city.csv"
-REACHABLE_CSV = OUTPUT_DIR / "reachable_dark_sites.csv"
+
+# Astronomy strict inputs (active)
+VIEWPOINTS_CSV = OUTPUT_DIR / "viewpoints_with_darkness_astronomystrict.csv"
+BEST_SITES_CSV = OUTPUT_DIR / "best_sites_per_city_astronomystrict.csv"
+REACHABLE_CSV = OUTPUT_DIR / "reachable_dark_sites_astronomystrict.csv"
+
+# Original clean inputs kept here for quick manual rollback:
+# VIEWPOINTS_CSV = OUTPUT_DIR / "viewpoints_with_darkness.csv"
+# BEST_SITES_CSV = OUTPUT_DIR / "best_sites_per_city.csv"
+# REACHABLE_CSV = OUTPUT_DIR / "reachable_dark_sites.csv"
+
+REGIONAL_MAP_HTML = OUTPUT_DIR / "perseidy_regional.html"
+FULL_CZ_MAP_HTML = OUTPUT_DIR / "perseidy_full_cz.html"
+
+# Optional alternative names if you ever want separate strict HTML files:
+# REGIONAL_MAP_HTML = OUTPUT_DIR / "perseidy_regional_astronomystrict.html"
+# FULL_CZ_MAP_HTML = OUTPUT_DIR / "perseidy_full_cz_astronomystrict.html"
 
 # Falchi data
 FALCHI_DATA = [
@@ -93,11 +107,11 @@ def add_falchi_layer(m):
     return overlay
 
 
-def create_regional_map():
+def create_regional_map(reachable_csv: Path, best_sites_csv: Path):
     print("Creating regional map...")
 
-    reachable = pd.read_csv(REACHABLE_CSV)
-    best_sites = pd.read_csv(BEST_SITES_CSV)
+    reachable = pd.read_csv(reachable_csv)
+    best_sites = pd.read_csv(best_sites_csv)
 
     # Create set of top site coordinates for highlighting
     top_site_coords = set()
@@ -240,16 +254,16 @@ def create_regional_map():
     '''
     m.get_root().html.add_child(folium.Element(legend_html))
 
-    output_file = OUTPUT_DIR / "perseidy_regional.html"
+    output_file = REGIONAL_MAP_HTML
     m.save(output_file)
     print("  Saved: {}".format(output_file))
     return output_file
 
 
-def create_full_cz_map():
+def create_full_cz_map(viewpoints_csv: Path):
     print("Creating full CZ map...")
 
-    df = pd.read_csv(VIEWPOINTS_CSV)
+    df = pd.read_csv(viewpoints_csv)
     df = df[(df['lat'] >= 48.5) & (df['lat'] <= 51.2)]
     df = df[(df['lon'] >= 12) & (df['lon'] <= 19)]
 
@@ -316,21 +330,30 @@ def create_full_cz_map():
     '''
     m.get_root().html.add_child(folium.Element(legend_html))
 
-    output_file = OUTPUT_DIR / "perseidy_full_cz.html"
+    output_file = FULL_CZ_MAP_HTML
     m.save(output_file)
     print("  Saved: {}".format(output_file))
     return output_file
 
 
 def main():
+    viewpoints_csv = VIEWPOINTS_CSV
+    reachable_csv = REACHABLE_CSV
+    best_sites_csv = BEST_SITES_CSV
+
     print("=" * 60)
     print("Generating HTML maps for Perseidy project")
     print("=" * 60)
+    print(f"Input viewpoints CSV: {viewpoints_csv}")
+    print(f"Input reachable CSV: {reachable_csv}")
+    print(f"Input best sites CSV: {best_sites_csv}")
+    print(f"Output regional map: {REGIONAL_MAP_HTML}")
+    print(f"Output full CZ map: {FULL_CZ_MAP_HTML}")
 
     OUTPUT_DIR.mkdir(exist_ok=True)
 
-    create_regional_map()
-    create_full_cz_map()
+    create_regional_map(reachable_csv=reachable_csv, best_sites_csv=best_sites_csv)
+    create_full_cz_map(viewpoints_csv=viewpoints_csv)
 
     print("\n" + "=" * 60)
     print("All maps generated! (2 HTML files)")

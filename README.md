@@ -86,9 +86,12 @@ perseidy/
 ├── vyhlidkova_mista_cr.csv     # Zdrojová data výhledových míst (od Michala, kontaminovaná)
 ├── vyhlidkova_mista_cr_clean.csv       # Vyčištěná data (pouze skutečné vyhlídky)
 ├── vyhlidkova_mista_cr_clean_named.csv # Pouze pojmenovaná místa (bez "Unnamed POI")
+├── vyhlidkova_mista_cr_astronomystrict.csv       # Přísná varianta pro pozorování oblohy
+├── vyhlidkova_mista_cr_astronomystrict_named.csv # Přísná varianta, jen pojmenované body
 ├── krajska_mista.csv           # Krajská města pro izochrony
 ├── crop_falchi_to_cz.py        # Skript pro oříznutí GeoTIFF
 ├── clean_viewpoints.py         # Čištění vstupních dat (odstraní surveillance kamery atd.)
+├── clean_viewpoints_astronomy_strict.py # Přísnější filtrování pro astronomy
 ├── generate_isochrones.py      # Generování izochron přes ORS API
 ├── analyze_dark_sites.py       # Hlavní analýza a průniky
 ├── create_html_maps.py         # Generování HTML map
@@ -146,6 +149,24 @@ Výstup:
 
 **Poznámka**: Analýza automaticky používá vyčištěná data (`vyhlidkova_mista_cr_clean.csv`).
 
+### 2b. Astronomy strict varianta (oddělená větev, nic nepřepisuje)
+
+Pokud chceš přísnější dataset pro pozorování oblohy (bez rozhleden/věží a bez části problematických názvů), spusť:
+
+```bash
+uv run python clean_viewpoints_astronomy_strict.py
+```
+
+Výstup:
+- `vyhlidkova_mista_cr_astronomystrict.csv`
+- `vyhlidkova_mista_cr_astronomystrict_named.csv`
+- `output/astronomystrict_filter_report.csv` (srovnání počtů a důvody vyřazení)
+
+Naměřený dopad (aktuální data):
+- clean reference: `5395` bodů
+- astronomy strict: `993` bodů
+- vypadlo proti clean: `4402` bodů (`81.59 %`)
+
 ### 3. Generování izochron
 
 ```bash
@@ -165,13 +186,47 @@ Výstup:
 - CSV s nejlepšími místy per kraj
 - CSV se všemi body a jejich hodnotou tmy
 
+Pro astronomy strict variantu (oddělené výstupy se suffixem):
+
+```bash
+uv run python analyze_dark_sites.py \
+	--viewpoints-csv vyhlidkova_mista_cr_astronomystrict.csv \
+	--output-suffix _astronomystrict
+```
+
+Vygeneruje například:
+- `output/viewpoints_with_darkness_astronomystrict.csv`
+- `output/reachable_dark_sites_astronomystrict.csv`
+- `output/best_sites_per_city_astronomystrict.csv`
+
 ### 4. Vytvoření HTML map
 
 ```bash
 uv run python create_html_maps.py
 ```
 
-Výstup: 3 HTML mapy v `output/`
+Výstup: 2 HTML mapy v `output/`
+
+`create_html_maps.py` je nyní nastavený natvrdo na astronomy strict vstupy
+(`output/*_astronomystrict.csv`), ale HTML ukládá pod standardní názvy:
+
+- `output/perseidy_regional.html`
+- `output/perseidy_full_cz.html`
+
+Spuštění:
+
+```bash
+uv run python create_html_maps.py
+```
+
+Tímto se původní HTML mapy přepisují astronomy strict obsahem.
+
+CSV varianty zůstávají odděleně zachované:
+- clean: `vyhlidkova_mista_cr_clean.csv`, `vyhlidkova_mista_cr_clean_named.csv`
+- astronomy strict: `vyhlidkova_mista_cr_astronomystrict.csv`, `vyhlidkova_mista_cr_astronomystrict_named.csv`
+
+Pro rychlý návrat na původní clean variantu stačí v `create_html_maps.py`
+odkomentovat původní trojici vstupních cest a zakomentovat astronomy strict trojici.
 
 ## Výstupy pro článek
 
