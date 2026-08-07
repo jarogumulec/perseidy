@@ -115,7 +115,8 @@ uv add nazev-balicku
 
 ## Konfigurace
 
-Vytvoř `config.py` ve stejném adresáři jako skripty:
+Vytvoř `config.py` ve stejném adresáři jako 
+skripty:
 
 ```python
 # OpenRouteService API key
