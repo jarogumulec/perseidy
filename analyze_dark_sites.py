@@ -16,6 +16,7 @@ import argparse
 from pathlib import Path
 import json
 import rasterio
+from publish_html import save_html_for_pages, nav_links_html, ratio_legend_html
 
 # Paths
 DATA_DIR = Path(__file__).parent / "data"
@@ -321,9 +322,18 @@ def create_summary_map(best_sites_df, all_dark_sites_df, output_suffix=""):
             icon=folium.Icon(color='red', icon='star')
         ).add_to(m)
 
+    m.get_root().html.add_child(
+        folium.Element(nav_links_html([
+            ("GitHub", "https://github.com/jarogumulec/perseidy"),
+            ("Regional", "perseidy_regional.html"),
+        ]))
+    )
+    m.get_root().html.add_child(folium.Element(ratio_legend_html()))
+
     output_file = output_with_suffix("dark_sites_map.html", output_suffix)
-    m.save(output_file)
-    print(f"\nInteractive map saved to: {output_file}")
+    saved_file, docs_file = save_html_for_pages(m, output_file)
+    print(f"\nInteractive map saved to: {saved_file}")
+    print(f"Mirrored to: {docs_file}")
 
 
 if __name__ == "__main__":

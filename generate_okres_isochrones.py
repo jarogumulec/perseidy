@@ -11,6 +11,7 @@ import json
 from pathlib import Path
 import time
 import config
+from publish_html import save_html_for_pages, nav_links_html
 
 # Paths
 OKRES_CSV = Path(__file__).parent / "okresni_mesta.csv"
@@ -157,9 +158,17 @@ def create_summary_map(stats_df):
             tooltip=f"{row['okres']}: {row['count']} bodů"
         ).add_to(m)
 
+    m.get_root().html.add_child(
+        folium.Element(nav_links_html([
+            ("GitHub", "https://github.com/jarogumulec/perseidy"),
+            ("Regional", "perseidy_regional.html"),
+        ]))
+    )
+
     output_file = OUTPUT_DIR / "okres_isochrones_map.html"
-    m.save(output_file)
-    print(f"Saved summary map to: {output_file}")
+    saved_file, docs_file = save_html_for_pages(m, output_file)
+    print(f"Saved summary map to: {saved_file}")
+    print(f"Mirrored to: {docs_file}")
 
 
 if __name__ == "__main__":

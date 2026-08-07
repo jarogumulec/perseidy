@@ -9,6 +9,7 @@ import pandas as pd
 import json
 from pathlib import Path
 import folium
+from publish_html import save_html_for_pages, nav_links_html, ratio_legend_html
 
 # Paths
 OUTPUT_DIR = Path(__file__).parent / "output"
@@ -113,6 +114,31 @@ def create_regional_map(reachable_csv: Path, best_sites_csv: Path):
     reachable = pd.read_csv(reachable_csv)
     best_sites = pd.read_csv(best_sites_csv)
 
+    region_specs = []
+    for city, (region_label, center) in CITY_TO_REGION.items():
+        geojson_file = ISOCHRONES_DIR / "isochrone_{}.geojson".format(city)
+        if not geojson_file.exists():
+            continue
+
+        with open(geojson_file) as f:
+            iso_data = json.load(f)
+
+        region_sites = reachable[reachable['reachable_from_city'] == city]
+        region_sites = region_sites[region_sites['darkness_value'] < 0.16]
+        if region_sites.empty:
+            continue
+
+        region_specs.append({
+            "city": city,
+            "region_label": region_label,
+            "center": center,
+            "iso_data": iso_data,
+            "region_sites": region_sites,
+            "avg_darkness": float(region_sites['darkness_value'].mean()),
+        })
+
+    region_specs.sort(key=lambda spec: spec["avg_darkness"])
+
     # Create set of top site coordinates for highlighting
     top_site_coords = set()
     for _, row in best_sites.iterrows():
@@ -124,25 +150,20 @@ def create_regional_map(reachable_csv: Path, best_sites_csv: Path):
     # Add Falchi first (bottom layer)
     add_falchi_layer(m)
 
-    # Process each city - create ONE FeatureGroup with isochrone + points together
-    # One checkbox controls both for each region
-    for city, (region_label, center) in CITY_TO_REGION.items():
-        geojson_file = ISOCHRONES_DIR / "isochrone_{}.geojson".format(city)
-        if not geojson_file.exists():
-            continue
-
-        with open(geojson_file) as f:
-            iso_data = json.load(f)
-
-        # Get points for this region
-        region_sites = reachable[reachable['reachable_from_city'] == city]
-        region_sites = region_sites[region_sites['darkness_value'] < 0.16]
-
-        # Only show Praha initially
-        show_praha = (city == "Praha")
+    # Process each city - create ONE FeatureGroup with isochrone + points together.
+    # The menu is sorted by average darkness so the darkest region appears first.
+    for spec in region_specs:
+        city = spec["city"]
+        region_label = spec["region_label"]
+        iso_data = spec["iso_data"]
+        region_sites = spec["region_sites"]
+        show_default = (spec is region_specs[0])
 
         # Create ONE FeatureGroup containing both isochrone and points
-        region_group = folium.FeatureGroup(name=u'{}: Izochrona + Body'.format(region_label), show=show_praha)
+        region_group = folium.FeatureGroup(
+            name=u'{} · průměr {:.4f}'.format(region_label, spec['avg_darkness']),
+            show=show_default,
+        )
 
         # Add isochrone to group (below points)
         iso_layer = folium.GeoJson(
@@ -194,69 +215,22 @@ def create_regional_map(reachable_csv: Path, best_sites_csv: Path):
         # Add entire group to map
         region_group.add_to(m)
 
-    # Layer control on the right - shows all checkboxes
-    folium.LayerControl(collapsed=False, position='topright').add_to(m)
-
-    # Legend with Falchi scale and top sites info
-    legend_rows = ""
-    for idx, (_, row) in enumerate(best_sites.iterrows()):
-        val = row.get('darkness_value', None)
-        if val is None or pd.isna(val):
-            continue
-        color = get_falchi_color(val)
-        city = row['reachable_from_city']
-        name = row.get('name', '?')
-        legend_rows += u'''
-        <tr style="background: linear-gradient(90deg, {} {}%, transparent {}%);">
-            <td>{}</td>
-            <td><b>{}</b></td>
-            <td>{}</td>
-            <td>{:.2f}</td>
-        </tr>'''.format(color, int(val*50), int(val*50), idx+1, city, name, val)
-
-    # Top sites table in bottom left
-    top_sites_html = u'''
-    <div style="position: fixed; bottom: 10px; left: 10px; z-index: 999;
-                background: white; padding: 10px; border-radius: 5px;
-                box-shadow: 0 0 5px rgba(0,0,0,0.3); font-size: 9px;
-                max-height: 250px; overflow-y: auto; max-width: 280px;">
-        <b>Nejtemnější místa per kraj</b><br>
-        <span style="color:#FF0000;">★ = nejlepší v kraji</span><hr style="margin:5px 0;">
-        <table style="width:100%; font-size:9px;">
-            <tr style="border-bottom:2px solid #333;">
-                <th>#</th><th>Kraj</th><th>Tma</th>
-            </tr>
-            {}
-        </table>
-    </div>
-    '''.format(legend_rows)
-    m.get_root().html.add_child(folium.Element(top_sites_html))
-
-    # Falchi legend with physical units in bottom right
-    legend_html = u'''
-    <div style="position: fixed; bottom: 10px; right: 10px; z-index: 1000;
-                background: white; padding: 10px; border-radius: 5px;
-                box-shadow: 0 0 5px rgba(0,0,0,0.3); font-size: 9px;">
-        <b>Falchi 2015 - Světelné znečištění</b><br>
-        <table>
-            <tr><th></th><th>Ratio</th><th>Artif.<br>(μcd/m²)</th><th>Total<br>(mcd/m²)</th></tr>
-            <tr><td style="background:#000000;width:12px;height:10px;"></td><td>≤1%</td><td>&lt;1.74</td><td>&lt;0.176</td></tr>
-            <tr><td style="background:#808080;width:12px;height:10px;"></td><td>1-2%</td><td>1.74-3.48</td><td>0.176-0.177</td></tr>
-            <tr><td style="background:#A9A9A9;width:12px;height:10px;"></td><td>2-4%</td><td>3.48-6.96</td><td>0.177-0.181</td></tr>
-            <tr><td style="background:#00008B;width:12px;height:10px;"></td><td>4-8%</td><td>6.96-13.9</td><td>0.181-0.188</td></tr>
-            <tr><td style="background:#0000FF;width:12px;height:10px;"></td><td>8-16%</td><td>13.9-27.8</td><td>0.188-0.202</td></tr>
-            <tr><td style="background:#444AF8;width:12px;height:10px;"></td><td>16-32%</td><td>27.8-55.7</td><td>0.202-0.230</td></tr>
-            <tr><td style="background:#006400;width:12px;height:10px;"></td><td>32-64%</td><td>55.7-111</td><td>0.230-0.285</td></tr>
-            <tr><td style="background:#008000;width:12px;height:10px;"></td><td>64-128%</td><td>111-223</td><td>0.285-0.397</td></tr>
-            <tr><td style="background:#FFFF00;width:12px;height:10px;"></td><td>>128%</td><td>&gt;223</td><td>&gt;0.397</td></tr>
-        </table>
-    </div>
-    '''
-    m.get_root().html.add_child(folium.Element(legend_html))
+    # Compact corner navigation and ratio-only legend.
+    m.get_root().html.add_child(
+        folium.Element(nav_links_html([
+            ("GitHub", "https://github.com/jarogumulec/perseidy"),
+            ("Celá ČR", "perseidy_full_cz.html"),
+            ("Brno", "perseidy_brno.html"),
+            ("Kopřivnice", "perseidy_koprivnice.html"),
+        ]))
+    )
+    folium.LayerControl(collapsed=True, position='topright').add_to(m)
+    m.get_root().html.add_child(folium.Element(ratio_legend_html()))
 
     output_file = REGIONAL_MAP_HTML
-    m.save(output_file)
-    print("  Saved: {}".format(output_file))
+    saved_file, docs_file = save_html_for_pages(m, output_file)
+    print("  Saved: {}".format(saved_file))
+    print("  Mirrored to: {}".format(docs_file))
     return output_file
 
 
@@ -309,30 +283,18 @@ def create_full_cz_map(viewpoints_csv: Path):
     ).add_to(m)
 
     # Legend with physical units
-    legend_html = u'''
-    <div style="position: fixed; bottom: 10px; right: 10px; z-index: 1000;
-                background: white; padding: 10px; border-radius: 5px;
-                box-shadow: 0 0 5px rgba(0,0,0,0.3); font-size: 9px;">
-        <b>Falchi 2015 - Světelné znečištění</b><br>
-        <table>
-            <tr><th></th><th>Ratio</th><th>Artif.<br>(μcd/m²)</th><th>Total<br>(mcd/m²)</th></tr>
-            <tr><td style="background:#000000;width:12px;height:10px;"></td><td>≤1%</td><td>&lt;1.74</td><td>&lt;0.176</td></tr>
-            <tr><td style="background:#808080;width:12px;height:10px;"></td><td>1-2%</td><td>1.74-3.48</td><td>0.176-0.177</td></tr>
-            <tr><td style="background:#A9A9A9;width:12px;height:10px;"></td><td>2-4%</td><td>3.48-6.96</td><td>0.177-0.181</td></tr>
-            <tr><td style="background:#00008B;width:12px;height:10px;"></td><td>4-8%</td><td>6.96-13.9</td><td>0.181-0.188</td></tr>
-            <tr><td style="background:#0000FF;width:12px;height:10px;"></td><td>8-16%</td><td>13.9-27.8</td><td>0.188-0.202</td></tr>
-            <tr><td style="background:#444AF8;width:12px;height:10px;"></td><td>16-32%</td><td>27.8-55.7</td><td>0.202-0.230</td></tr>
-            <tr><td style="background:#006400;width:12px;height:10px;"></td><td>32-64%</td><td>55.7-111</td><td>0.230-0.285</td></tr>
-            <tr><td style="background:#008000;width:12px;height:10px;"></td><td>64-128%</td><td>111-223</td><td>0.285-0.397</td></tr>
-            <tr><td style="background:#FFFF00;width:12px;height:10px;"></td><td>>128%</td><td>&gt;223</td><td>&gt;0.397</td></tr>
-        </table>
-    </div>
-    '''
-    m.get_root().html.add_child(folium.Element(legend_html))
+    m.get_root().html.add_child(
+        folium.Element(nav_links_html([
+            ("GitHub", "https://github.com/jarogumulec/perseidy"),
+            ("Regional", "perseidy_regional.html"),
+        ]))
+    )
+    m.get_root().html.add_child(folium.Element(ratio_legend_html()))
 
     output_file = FULL_CZ_MAP_HTML
-    m.save(output_file)
-    print("  Saved: {}".format(output_file))
+    saved_file, docs_file = save_html_for_pages(m, output_file)
+    print("  Saved: {}".format(saved_file))
+    print("  Mirrored to: {}".format(docs_file))
     return output_file
 
 

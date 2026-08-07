@@ -9,6 +9,7 @@ import geopandas as gpd
 import json
 from pathlib import Path
 import folium
+from publish_html import save_html_for_pages, nav_links_html, ratio_legend_html
 
 # Paths
 OUTPUT_DIR = Path(__file__).parent / "output"
@@ -224,40 +225,22 @@ def create_location_map(location_key: str) -> None:
     dark_60 = len(sites_by_isochrone.get(60, pd.DataFrame())[sites_by_isochrone.get(60, pd.DataFrame())['darkness_value'] < 0.16])
     print(f"  Total: {total_60} viewpoints ({dark_60} dark <0.16) within 1h drive")
 
-    # Layer control
-    folium.LayerControl(collapsed=False).add_to(m)
+    # Layer control stays available but collapsed so it does not dominate mobile screens.
+    folium.LayerControl(collapsed=True).add_to(m)
 
-    # Legend with μcd/m² extended to yellow/orange
-    legend_html = u'''
-    <div style="position: fixed; bottom: 10px; right: 10px; z-index: 1000;
-                background: white; padding: 10px; border-radius: 5px;
-                box-shadow: 0 0 5px rgba(0,0,0,0.3); font-size: 9px;">
-        <b>Světelné znečištění oblohy</b><br>
-        <table>
-            <tr><td style="background:#000000;width:12px;height:10px;"></td><td>&lt;1.74 μcd/m²</td></tr>
-            <tr><td style="background:#808080;width:12px;height:10px;"></td><td>1.74-3.48 μcd/m²</td></tr>
-            <tr><td style="background:#A9A9A9;width:12px;height:10px;"></td><td>3.48-6.96 μcd/m²</td></tr>
-            <tr><td style="background:#00008B;width:12px;height:10px;"></td><td>6.96-13.9 μcd/m²</td></tr>
-            <tr><td style="background:#0000FF;width:12px;height:10px;"></td><td>13.9-27.8 μcd/m²</td></tr>
-            <tr><td style="background:#444AF8;width:12px;height:10px;"></td><td>27.8-55.7 μcd/m²</td></tr>
-            <tr><td style="background:#006400;width:12px;height:10px;"></td><td>55.7-111 μcd/m²</td></tr>
-            <tr><td style="background:#008000;width:12px;height:10px;"></td><td>111-223 μcd/m²</td></tr>
-            <tr><td style="background:#FFFF00;width:12px;height:10px;"></td><td>223-445 μcd/m²</td></tr>
-        </table>
-        <hr style="margin:5px 0;">
-        <b>Izochrony:</b><br>
-        <span style="color:#4CAF50">●</span> 15 min<br>
-        <span style="color:#2196F3">●</span> 30 min<br>
-        <span style="color:#FF9800">●</span> 45 min<br>
-        <span style="color:#F44336">●</span> 60 min
-    </div>
-    '''
-    m.get_root().html.add_child(folium.Element(legend_html))
+    m.get_root().html.add_child(
+        folium.Element(nav_links_html([
+            ("GitHub", "https://github.com/jarogumulec/perseidy"),
+            ("Regional", "perseidy_regional.html"),
+        ]))
+    )
+    m.get_root().html.add_child(folium.Element(ratio_legend_html("Světelné znečištění oblohy")))
 
     # Save to output directory
     output_file = OUTPUT_DIR / f"perseidy_{location_key}.html"
-    m.save(output_file)
-    print(f"  Saved: {output_file}")
+    saved_file, docs_file = save_html_for_pages(m, output_file)
+    print(f"  Saved: {saved_file}")
+    print(f"  Mirrored to: {docs_file}")
 
 
 def main():

@@ -53,6 +53,8 @@ Po spuštění `create_html_maps.py` najdeš v `output/` tři varianty map:
 - **Layer control**: Zaškrtávací seznam vrstev (Světelné znečištění, Izochrony, Rozhledová místa)
 - **Legenda**: Kompaktní barevná škála Falchi vpravo dole
 
+Pro GitHub Pages je připravený vstupní web v `docs/index.html`. Když nastavíš Pages na větev `main` a složku `docs`, bude hlavní adresa `https://jarogumulec.github.io/perseidy/` a HTML soubory budou canonical v `docs/output/`. Původní přímé odkazy do `output/` zůstanou funkční, protože generované HTML se zrcadlí i do kořenového `output/` jako legacy mirror.
+
 ## Klasifikace tmy (Falchi et al.)
 
 | Hodnota | Kategorie | Popis |
