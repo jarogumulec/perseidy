@@ -138,7 +138,7 @@ def create_summary_map(stats_df):
     """Create a map showing all district centers with stats in popup."""
     import folium
 
-    m = folium.Map(location=[49.8, 15.5], zoom_start=7, tiles='OpenStreetMap')
+    m = folium.Map(location=[49.8, 15.5], zoom_start=7, tiles='OpenStreetMap', control_scale=True)
 
     for _, row in stats_df.iterrows():
         if row['count'] == 0:

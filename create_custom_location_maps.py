@@ -140,7 +140,7 @@ def create_location_map(location_key: str) -> None:
             print(f"  {time_min}min: {len(sites_by_isochrone[time_min])} viewpoints")
 
     # Create map centered on location
-    m = folium.Map(location=coords, zoom_start=10, tiles='cartodb.dark_matter')
+    m = folium.Map(location=coords, zoom_start=10, tiles='cartodb.dark_matter', control_scale=True)
 
     # Add Falchi overlay
     add_falchi_layer(m)

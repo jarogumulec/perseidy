@@ -287,7 +287,7 @@ def create_summary_map(best_sites_df, all_dark_sites_df, output_suffix=""):
     center_lat = all_dark_sites_df['lat'].mean()
     center_lon = all_dark_sites_df['lon'].mean()
 
-    m = folium.Map(location=[center_lat, center_lon], zoom_start=7)
+    m = folium.Map(location=[center_lat, center_lon], zoom_start=7, control_scale=True)
 
     # Add all dark sites as circles
     for _, row in all_dark_sites_df.iterrows():

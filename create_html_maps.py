@@ -114,7 +114,19 @@ def create_regional_map(reachable_csv: Path, best_sites_csv: Path):
     reachable = pd.read_csv(reachable_csv)
     best_sites = pd.read_csv(best_sites_csv)
 
-    region_specs = []
+    # Create set of top site coordinates for highlighting
+    top_site_coords = set()
+    for _, row in best_sites.iterrows():
+        top_site_coords.add((round(row['lat'], 4), round(row['lon'], 4)))
+
+    # Create map with dark tiles
+    m = folium.Map(location=[49.8, 15.5], zoom_start=7, tiles='cartodb.dark_matter', control_scale=True)
+
+    # Add Falchi first (bottom layer)
+    add_falchi_layer(m)
+
+    # Process each city in the manual order defined in CITY_TO_REGION.
+    # Prague is shown first by default.
     for city, (region_label, center) in CITY_TO_REGION.items():
         geojson_file = ISOCHRONES_DIR / "isochrone_{}.geojson".format(city)
         if not geojson_file.exists():
@@ -125,43 +137,12 @@ def create_regional_map(reachable_csv: Path, best_sites_csv: Path):
 
         region_sites = reachable[reachable['reachable_from_city'] == city]
         region_sites = region_sites[region_sites['darkness_value'] < 0.16]
-        if region_sites.empty:
-            continue
 
-        region_specs.append({
-            "city": city,
-            "region_label": region_label,
-            "center": center,
-            "iso_data": iso_data,
-            "region_sites": region_sites,
-            "avg_darkness": float(region_sites['darkness_value'].mean()),
-        })
-
-    region_specs.sort(key=lambda spec: spec["avg_darkness"])
-
-    # Create set of top site coordinates for highlighting
-    top_site_coords = set()
-    for _, row in best_sites.iterrows():
-        top_site_coords.add((round(row['lat'], 4), round(row['lon'], 4)))
-
-    # Create map with dark tiles
-    m = folium.Map(location=[49.8, 15.5], zoom_start=7, tiles='cartodb.dark_matter')
-
-    # Add Falchi first (bottom layer)
-    add_falchi_layer(m)
-
-    # Process each city - create ONE FeatureGroup with isochrone + points together.
-    # The menu is sorted by average darkness so the darkest region appears first.
-    for spec in region_specs:
-        city = spec["city"]
-        region_label = spec["region_label"]
-        iso_data = spec["iso_data"]
-        region_sites = spec["region_sites"]
-        show_default = (spec is region_specs[0])
+        show_default = (city == "Praha")
 
         # Create ONE FeatureGroup containing both isochrone and points
         region_group = folium.FeatureGroup(
-            name=u'{} · průměr {:.4f}'.format(region_label, spec['avg_darkness']),
+            name=u'{}: Izochrona + Body'.format(region_label),
             show=show_default,
         )
 
@@ -224,7 +205,7 @@ def create_regional_map(reachable_csv: Path, best_sites_csv: Path):
             ("Kopřivnice", "perseidy_koprivnice.html"),
         ]))
     )
-    folium.LayerControl(collapsed=True, position='topright').add_to(m)
+    folium.LayerControl(collapsed=False, position='topright').add_to(m)
     m.get_root().html.add_child(folium.Element(ratio_legend_html()))
 
     output_file = REGIONAL_MAP_HTML
@@ -243,7 +224,7 @@ def create_full_cz_map(viewpoints_csv: Path):
 
     darkest_site = df[df['darkness_value'].notna()].sort_values('darkness_value').iloc[0]
 
-    m = folium.Map(location=[49.8, 15.5], zoom_start=7, tiles='cartodb.dark_matter')
+    m = folium.Map(location=[49.8, 15.5], zoom_start=7, tiles='cartodb.dark_matter', control_scale=True)
 
     # Add Falchi
     add_falchi_layer(m)
