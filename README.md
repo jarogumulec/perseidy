@@ -64,7 +64,7 @@ Po spuštění `create_html_maps.py` najdeš v `output/` dvě hlavní varianty m
 - **Layer control**: Zaškrtávací seznam vrstev (Světelné znečištění, Izochrony, Výhledová místa)
 - **Legenda**: Kompaktní barevná škála Falchi vpravo dole
 
-HTML mapy se generují do `output/`, pro GitHub Pages se pak kopírují do `docs/output/`:
+HTML mapy se generují **současně do obou složek** (`output/` i `docs/output/`) přes `save_html_for_pages()`:
 
 | Cíl | Popis |
 |-----|-------|
