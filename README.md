@@ -1,10 +1,10 @@
-# Perseidy - Nejtemnější místa pro pozorování meteorů
+# Interaktivní mapa tmavých míst pro pozorování oblohy v ČR
 
 ## 🌌 Interaktivní mapa je online
 
  **https://jarogumulec.github.io/perseidy/**
 
-Mapa byla představena v článku iROZHLAS.cz: *"Odkud sledovat Perseidy? Napoví mapa vyhlídkových míst s nejmenším světelným znečištěním"* (Petr Kočí, Michal Kašpárek)
+Mapa představena v článku iROZHLAS.cz: *"Odkud sledovat Perseidy? Napoví mapa vyhlídkových míst s nejmenším světelným znečištěním"* (Petr Kočí, Michal Kašpárek)
 
 ---
 
