@@ -1,9 +1,19 @@
 # Perseidy - Nejtemnější místa pro pozorování meteorů
 
-Projekt hledá optimální místa v České republice pro pozorování Perseid a dalších meteorických rojů na základě:
-- **Světelného znečištění** (Falchi et al. 2016 atlas)
-- **Výhledových míst** z OSM (rozhledny, vyhlídky, vrcholy)
-- **Dostupnosti** (izochrony dojezdu z krajských měst)
+## 🌌 Interaktivní mapa je online
+
+ **https://jarogumulec.github.io/perseidy/**
+
+Mapa byla představena v článku iROZHLAS.cz: *"Odkud sledovat Perseidy? Napoví mapa vyhlídkových míst s nejmenším světelným znečištěním"* (Petr Kočí, Michal Kašpárek)
+
+---
+
+Tento projekt vytváří interaktivní nástroj pro hledání optimálních lokalit v České republice pro pozorování Perseid a dalších meteorických rojů. Analýza kombinuje tři klíčové faktory:
+- **Světelné znečištění** (Falchi et al. 2016 atlas) — jak světlá je obloha nad daným místem
+- **Výhledová místa** z OpenStreetMap (rozhledny, vyhlídky, vrcholy) — kde skutečně vidíš na oblohu
+- **Dostupnost** (izochrony dojezdu z krajských měst) — kam stihneš dojet za hodinu
+
+Pro představu: v celé ČR existují stovky potenciálních lokalit, ale po filtrování podle světelného znečištění a dopravní dostupnosti zůstává každému regionu jen několik málo vhodných míst. Nejhorší situace je v okolí Prahy, kde se světlo ze města šíří desítky kilometrů a kvalitních lokalit je velmi omezený počet.
 
 ## Proč právě Falchi atlas? (i když data jsou z roku 2015)
 
