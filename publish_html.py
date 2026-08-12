@@ -5,6 +5,25 @@ REPO_ROOT = Path(__file__).resolve().parent
 DOCS_DIR = REPO_ROOT / "docs"
 
 
+def seo_meta_tags(title: str, description: str, url: str = None) -> str:
+    """Generate SEO meta tags for a page."""
+    base_url = "https://jarogumulec.github.io/perseidy"
+    full_url = f"{base_url}/{url}" if url else base_url
+
+    return f'''
+    <title>{title}</title>
+    <meta name="description" content="{description}">
+    <meta name="keywords" content="perseidy, tmava obloha, svetelne zneistení, astronomie, ceska republika, vyhlidkova mista">
+    <meta property="og:title" content="{title}">
+    <meta property="og:description" content="{description}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{full_url}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{title}">
+    <meta name="twitter:description" content="{description}">
+    '''
+
+
 def save_html_for_pages(map_obj, output_file: Path):
     output_file = Path(output_file)
     docs_file = DOCS_DIR / output_file.relative_to(REPO_ROOT)

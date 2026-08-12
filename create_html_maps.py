@@ -9,7 +9,7 @@ import pandas as pd
 import json
 from pathlib import Path
 import folium
-from publish_html import save_html_for_pages, nav_links_html, ratio_legend_html
+from publish_html import save_html_for_pages, nav_links_html, ratio_legend_html, seo_meta_tags
 
 # Paths
 OUTPUT_DIR = Path(__file__).parent / "output"
@@ -196,6 +196,15 @@ def create_regional_map(reachable_csv: Path, best_sites_csv: Path):
         # Add entire group to map
         region_group.add_to(m)
 
+    # SEO meta tags
+    m.get_root().html.add_child(
+        folium.Element(seo_meta_tags(
+            title="Perseidy - Mapa tmavých míst pro pozorování oblohy v ČR",
+            description="Interaktivní mapa vyhlídkových míst v České republice podle světelného znečištění. Najdi si místo s nejtmavší oblohou do 1 hodiny jízdy.",
+            url="perseidy_regional.html"
+        ))
+    )
+
     # Compact corner navigation and ratio-only legend.
     m.get_root().html.add_child(
         folium.Element(nav_links_html([
@@ -262,6 +271,15 @@ def create_full_cz_map(viewpoints_csv: Path):
         icon=folium.Icon(color='green', icon='star', prefix='fa'),
         tooltip='Nejtemnější místo v ČR'
     ).add_to(m)
+
+    # SEO meta tags
+    m.get_root().html.add_child(
+        folium.Element(seo_meta_tags(
+            title="Nejtemnější místa v ČR - Mapa vyhlídek pro pozorování hvězd",
+            description="Prozkoumej celou Českou republiku a najdi svoje místo s nejtmavší oblohou. Interaktivní mapa všech vyhlídkových míst se světelným znečištěním.",
+            url="perseidy_full_cz.html"
+        ))
+    )
 
     # Legend with physical units
     m.get_root().html.add_child(
