@@ -9,7 +9,7 @@ import pandas as pd
 import json
 from pathlib import Path
 import folium
-from publish_html import save_html_for_pages, nav_links_html, ratio_legend_html, seo_meta_tags
+from publish_html import save_html_for_pages, nav_links_html, ratio_legend_html, seo_meta_tags, add_dark_basemap
 
 # Paths
 OUTPUT_DIR = Path(__file__).parent / "output"
@@ -120,7 +120,8 @@ def create_regional_map(reachable_csv: Path, best_sites_csv: Path):
         top_site_coords.add((round(row['lat'], 4), round(row['lon'], 4)))
 
     # Create map with dark tiles
-    m = folium.Map(location=[49.8, 15.5], zoom_start=7, tiles='cartodb.dark_matter', control_scale=True)
+    m = folium.Map(location=[49.8, 15.5], zoom_start=7, tiles=None, control_scale=True)
+    add_dark_basemap(m)
 
     # Add Falchi first (bottom layer)
     add_falchi_layer(m)
@@ -233,7 +234,8 @@ def create_full_cz_map(viewpoints_csv: Path):
 
     darkest_site = df[df['darkness_value'].notna()].sort_values('darkness_value').iloc[0]
 
-    m = folium.Map(location=[49.8, 15.5], zoom_start=7, tiles='cartodb.dark_matter', control_scale=True)
+    m = folium.Map(location=[49.8, 15.5], zoom_start=7, tiles=None, control_scale=True)
+    add_dark_basemap(m)
 
     # Add Falchi
     add_falchi_layer(m)

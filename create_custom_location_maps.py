@@ -9,7 +9,7 @@ import geopandas as gpd
 import json
 from pathlib import Path
 import folium
-from publish_html import save_html_for_pages, nav_links_html, ratio_legend_html
+from publish_html import save_html_for_pages, nav_links_html, ratio_legend_html, add_dark_basemap
 
 # Paths
 OUTPUT_DIR = Path(__file__).parent / "output"
@@ -140,7 +140,8 @@ def create_location_map(location_key: str) -> None:
             print(f"  {time_min}min: {len(sites_by_isochrone[time_min])} viewpoints")
 
     # Create map centered on location
-    m = folium.Map(location=coords, zoom_start=10, tiles='cartodb.dark_matter', control_scale=True)
+    m = folium.Map(location=coords, zoom_start=10, tiles=None, control_scale=True)
+    add_dark_basemap(m)
 
     # Add Falchi overlay
     add_falchi_layer(m)

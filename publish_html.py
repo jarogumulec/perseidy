@@ -4,6 +4,58 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent
 DOCS_DIR = REPO_ROOT / "docs"
 
+# Dark basemap - OpenFreeMap "dark" style rendered via MapLibre GL.
+# Free, no API key (CARTO dark_matter now shows an "API key required"
+# overlay on pages with heavy traffic). Labels (cities, rivers, ...) are
+# part of the style - a single layer, nothing stacked on top.
+OPENFREEMAP_DARK_STYLE = "https://tiles.openfreemap.org/styles/dark"
+MAPLIBRE_GL_VERSION = "4.7.1"
+MAPLIBRE_GL_LEAFLET_VERSION = "0.1.4"
+
+
+def add_dark_basemap(map_obj):
+    """Add the OpenFreeMap dark basemap to a folium map.
+
+    Folium maps are Leaflet-based, so a MapLibre style cannot be used
+    directly - we bridge it with the official @maplibre/maplibre-gl-leaflet
+    plugin. The plugin layer is non-interactive (pointer events pass
+    through), so popups/markers keep working.
+    """
+    from branca.element import JavascriptLink, CssLink
+    from folium.elements import MacroElement
+    from jinja2 import Template
+
+    root = map_obj.get_root()
+    root.header.add_child(CssLink(f"https://unpkg.com/maplibre-gl@{MAPLIBRE_GL_VERSION}/dist/maplibre-gl.css"))
+    root.html.add_child(JavascriptLink(f"https://unpkg.com/maplibre-gl@{MAPLIBRE_GL_VERSION}/dist/maplibre-gl.js"))
+    root.html.add_child(JavascriptLink(
+        f"https://unpkg.com/@maplibre/maplibre-gl-leaflet@{MAPLIBRE_GL_LEAFLET_VERSION}/dist/leaflet-maplibre-gl.js"
+    ))
+
+    class MapLibreDarkBasemap(MacroElement):
+        _template = Template(
+            """
+            {% macro script(this, kwargs) %}
+                var {{ this.get_name() }} = L.maplibreGL({
+                    style: {{ this.style|tojson }},
+                    interactive: false,
+                    attributionControl: true,
+                    maxZoom: 14,
+                });
+                {{ this._parent.get_name() }}.addLayer({{ this.get_name() }});
+                {{ this._parent.get_name() }}.getPane('tilePane').style.background = '#0d0d0d';
+            {% endmacro %}
+            """
+        )
+
+        def __init__(self, style):
+            super().__init__()
+            # must be a valid JS identifier - folium does not sanitize it
+            self._name = 'maplibreDarkBasemap'
+            self.style = style
+
+    MapLibreDarkBasemap(OPENFREEMAP_DARK_STYLE).add_to(map_obj)
+
 
 def seo_meta_tags(title: str, description: str, url: str = None) -> str:
     """Generate SEO meta tags for a page."""

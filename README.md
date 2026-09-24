@@ -189,7 +189,6 @@ Výstup:
 
 ## Citace dat
 
-Pokud používáš tato data ve veřejném projektu:
 
 ```
 Data světelného znečištění: Falchi, F., Cinzano, P., Duriscoe, D., et al. (2016).
@@ -203,6 +202,10 @@ https://doi.org/10.1126/sciadv.1600377
 
 Data výhledových míst: Michal Kašpárek / Český rozhlas
 https://github.com/DataRozhlas/divnovylety
+
+Podkladová mapa: openfreemap-dark (switch 24.9.2026 protože původní CARTO dark_matter potřebovala API key při větším provozu). 
+nastaveno podle https://madewithmaplibre.com/basemaps/styles/openfreemap-dark/
+
 ```
 
 ## Autoři
